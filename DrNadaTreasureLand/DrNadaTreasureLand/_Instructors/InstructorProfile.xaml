@@ -1,0 +1,71 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand._Instructors.InstructorProfile"
+                      ResizeMode="NoResize"
+                      Title="Ahmed Profile"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="438.743"
+                      Width="420" Loaded="MetroWindow_Loaded" FontSize="15">
+    <Grid>
+        <GroupBox Header="Personal Instructor Information" HorizontalAlignment="Stretch" Height="179" Margin="5,5,5,0" VerticalAlignment="Top">
+            <Grid>
+                <Label Content="Name: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-1,0,0"/>
+                <Label x:Name="lbl_name" Content="Ahmed Magdy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,-1,0,0" FontWeight="Bold" Width="333"/>
+                <Label Content="Age:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,29,0,0"/>
+                <Label x:Name="lbl_age" Content="22 Years Old" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,29,0,0" FontWeight="Bold"/>
+                <Label Content="Gender:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="214,29,0,0"/>
+                <Label x:Name="lbl_gender" Content="Female" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="276,29,0,0" FontWeight="Bold"/>
+                <Label Content="Address:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,59,0,0"/>
+                <Label x:Name="lbl_address" Content="53 Shorafa Street - Madkoor - Feisal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="72,59,0,0" FontWeight="Bold" Width="316"/>
+                <Label Content="Phone:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,85,0,0"/>
+                <Label x:Name="lbl_phone" Content="+201120699180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="62,85,0,0" FontWeight="Bold"/>
+                <Label Content="Qualification:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,111,0,0"/>
+                <Label x:Name="lbl_qualifier" Content="Bachelors" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="99,111,0,0" FontWeight="Bold"/>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Instructor Classes" HorizontalAlignment="Stretch" Height="176" Margin="5,189,5,0" VerticalAlignment="Top">
+            <ListView x:Name="courses_listView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Class.Number}" Width="30"/>
+                        <GridViewColumn Header="Course" DisplayMemberBinding="{Binding Course.Name}" Width="110"/>
+                        <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Class.StartDate, StringFormat=d}"/>
+                        <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Class.EndDate, StringFormat=d}"/>
+                        <GridViewColumn Header="Days Per Week" Width="230">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Class.DaysPerWeek}" IsSynchronizedWithCurrentItem="True" Margin="-6,0,-6,0">
+                                        <!--<ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} ({1} - {2})">
+                                                            <Binding Path="Name"/>
+                                                            <Binding Path="StartDate"/>
+                                                            <Binding Path="EndDate"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>-->
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+        <Button Content="Print Profile" HorizontalAlignment="Left" Height="31" Margin="289,370,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click_1" FontSize="17"/>
+        <Button Content="Open CV" HorizontalAlignment="Left" Height="31" Margin="160,370,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click" FontSize="17"/>
+
+    </Grid>
+
+</Controls:MetroWindow>
+    
+

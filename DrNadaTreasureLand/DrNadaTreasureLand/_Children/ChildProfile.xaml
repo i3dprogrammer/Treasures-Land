@@ -1,0 +1,99 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand._Children.ChildProfile"
+                      ResizeMode="NoResize"
+                      Title="Ahmed Profile"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="799.5"
+                      Width="479.5" Loaded="MetroWindow_Loaded" FontSize="15">
+    <Grid >
+        <GroupBox Header="Personal Child Information" HorizontalAlignment="Stretch" Height="312" Margin="5,5,5,0" VerticalAlignment="Top">
+            <Grid>
+                <Label x:Name="lbl_name" Content="Ahmed Magdy" HorizontalAlignment="Left" Margin="57,0,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="391"/>
+                <Label x:Name="lbl_age" Content="20 years old" HorizontalAlignment="Left" Margin="57,28,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label x:Name="lbl_gender" Content="Male" HorizontalAlignment="Left" Margin="270,28,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Name: " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label Content="Age:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,28,0,0"/>
+                <Label Content="Gender:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="195,28,0,0"/>
+                <Label Content="Academic Year:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,78,0,0"/>
+                <Label x:Name="lbl_academicYear" Content="Prep School - Year 5" HorizontalAlignment="Left" Margin="113,78,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Education Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,54,0,0"/>
+                <Label x:Name="lbl_educationType" Content="Governmental Arabic" HorizontalAlignment="Left" Margin="113,54,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Birth Order:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,104,0,0"/>
+                <Label x:Name="lbl_birthOrder" Content="Oldest Child" HorizontalAlignment="Left" Margin="92,104,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Traits:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,134,0,0"/>
+                <Label Content="What does the child do in the free time?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,164,0,0"/>
+                <Label Content="How does the child handle problems?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,213,0,0"/>
+                <TextBlock x:Name="lbl_traits" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Height="20" Margin="54,139,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="394" FontWeight="Bold"/>
+                <TextBlock x:Name="lbl_freeTime" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Height="21" Margin="12,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="436" FontWeight="Bold"><Run Text="edgy"/><LineBreak/><Run Text="edgy"/></TextBlock>
+                <TextBlock x:Name="lbl_problems" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" Height="40" Margin="12,237,-5,-4" TextWrapping="Wrap" VerticalAlignment="Top" Width="441" FontWeight="Bold"><Run Text="Edgy"/><LineBreak/><Run Text="Edgy"/></TextBlock>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox" Header="Guardian Info" Height="174" VerticalAlignment="Top" Margin="5,322,5,0">
+            <Grid>
+                <Label x:Name="label" Content="Guardian Name:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy" Content="Father Phone:" HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy1" Content="Mother Phone:" HorizontalAlignment="Left" Margin="220,26,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy2" Content="Father Job:" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy3" Content="Mother Job:" HorizontalAlignment="Left" Margin="197,52,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy4" Content="WhatsApp Contant Number:" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy5" Content="Mother Qualification:" HorizontalAlignment="Left" Margin="0,104,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lbl_guardian" Content="Magdy (Father)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="117,0,0,0" FontWeight="Bold"/>
+                <Label x:Name="lbl_fatherPhone" Content="+201120699180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="96,26,0,0" FontWeight="Bold"/>
+                <Label x:Name="lbl_motherPhone" Content="+201120699180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="324,26,0,0" FontWeight="Bold"/>
+                <Label x:Name="lbl_fatherJob" Content="Banker" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82,52,0,0" FontWeight="Bold"/>
+                <Label x:Name="lbl_motherJob" Content="Journalist" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="286,52,0,0" FontWeight="Bold"/>
+                <Label x:Name="lbl_whatsApp" Content="+201120699180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="197,78,0,0" FontWeight="Bold"/>
+                <Label x:Name="lbl_motherQualifier" Content="Bachelors" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,104,0,0" FontWeight="Bold"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Classes" Height="224" Margin="5,501,5,0" VerticalAlignment="Top">
+            <Grid>
+                <Label Content="Total Cost:" Margin="0,0,361,155"/>
+                <Label x:Name="lbl_cost" Content="50$" Margin="92,0,0,155"/>
+                <ListView x:Name="courses_listView" Margin="0,30,0,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Class.Number}" Width="30"/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Course.Name}" Width="50"/>
+                            <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Class.StartDate, StringFormat=d}"/>
+                            <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Class.EndDate, StringFormat=d}"/>
+                            <GridViewColumn Header="Days Per Week" Width="130">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Class. DaysPerWeek}" IsSynchronizedWithCurrentItem="True" Margin="-6,0,-6,0">
+                                            <!--<ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock>
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}{0} ({1} - {2})">
+                                                                <Binding Path="Name"/>
+                                                                <Binding Path="StartDate"/>
+                                                                <Binding Path="EndDate"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>-->
+                                        </ComboBox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+        </GroupBox>
+        <Button Content="Print Profile" HorizontalAlignment="Left" Height="32" Margin="308,730,0,0" VerticalAlignment="Top" Width="162" Click="Button_Click"/>
+
+    </Grid>
+    <!-- your content -->
+
+</Controls:MetroWindow>
+    
+

@@ -1,0 +1,88 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand._Instructors.AddNewInstructor"
+                      ResizeMode="NoResize"
+                      Title="Add new instructor"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="307.841"
+                      Width="512.735" Loaded="MetroWindow_Loaded" FontSize="15">
+    <Grid>
+        <GroupBox Header="Instructor pesronal information" Height="229" Margin="5,5,5,0" VerticalAlignment="Top">
+            <Grid>
+                <Label Content="Instructor Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-2,0,0"/>
+                <TextBox x:Name="txt_instructorName" HorizontalAlignment="Left" Height="23" Margin="122,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="359"/>
+                <Label Content="Gender" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,29,0,0"/>
+                <Label Content="Age" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="291,28,0,0"/>
+                <ComboBox x:Name="cmb_gender" HorizontalAlignment="Left" Margin="122,31,0,0" VerticalAlignment="Top" Width="155">
+                    <ComboBoxItem Content="Male"/>
+                    <ComboBoxItem Content="Female"/>
+                </ComboBox>
+                <Controls:NumericUpDown x:Name="num_age" HorizontalAlignment="Left" Margin="339,31,0,0" VerticalAlignment="Top" Width="142"/>
+                <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,61,0,0"/>
+                <TextBox x:Name="txt_address" HorizontalAlignment="Left" Height="23" Margin="122,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="359"/>
+                <Label Content="Phone" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,92,0,0"/>
+                <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="23" Margin="122,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="359"/>
+                <Label Content="CV" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,125,0,0"/>
+                <Button Content="..." HorizontalAlignment="Left" Margin="441,124,0,0" VerticalAlignment="Top" Width="40" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="Button_Click" FontSize="17"/>
+                <TextBlock x:Name="lblBlock_CV" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="18" Margin="122,129,0,0" TextWrapping="Wrap" Text="...." VerticalAlignment="Top" Width="314"/>
+                <Label Content="Qualification" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,158,0,0"/>
+                <TextBox x:Name="txt_qualifier" HorizontalAlignment="Left" Height="23" Margin="122,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="359"/>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Instructor Courses" HorizontalAlignment="Stretch" Height="177" Margin="5,239,5,0" VerticalAlignment="Top" Visibility="Hidden">
+            <ListView x:Name="courses_listView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Checked}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Course.Id}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Course.Name}"/>
+                        <GridViewColumn Header="Class" DisplayMemberBinding="{Binding Number}"/>
+                        <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Class.StartDate, StringFormat=d}"/>
+                        <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Class.EndDate, StringFormat=d}"/>
+                        <GridViewColumn Header="Days Per Week">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Class.DaysPerWeek}" IsSynchronizedWithCurrentItem="True" Margin="-6,0,-6,0">
+                                        <!--<ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} ({1} - {2})">
+                                                            <Binding Path="Name"/>
+                                                            <Binding Path="StartDate"/>
+                                                            <Binding Path="EndDate"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>-->
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+        <Button x:Name="btn_delete" Content="Delete" HorizontalAlignment="Left" Margin="5,239,0,0" VerticalAlignment="Top" Width="103" Visibility="Hidden" Click="btn_delete_Click" FontSize="17"/>
+        <Button x:Name="btn_addInstructor" Content="Add Instructor" HorizontalAlignment="Left" Margin="364,239,0,0" VerticalAlignment="Top" Width="134" Click="btn_addInstructor_Click" FontSize="17"/>
+        <Button x:Name="btn_clear" Content="Clear Form" HorizontalAlignment="Left" Margin="246,239,0,0" VerticalAlignment="Top" Width="113" FontSize="17" Click="btn_clear_Click"/>
+
+    </Grid>
+
+    <!-- your content -->
+
+</Controls:MetroWindow>
+    
+

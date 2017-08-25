@@ -1,0 +1,45 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand.Filter"
+                      ResizeMode="NoResize"
+                      Title="List Filters"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="240.334"
+                      Width="498" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <ComboBox x:Name="cmb_filterName" HorizontalAlignment="Left" Margin="11,2,0,0" VerticalAlignment="Top" Width="127">
+        </ComboBox>
+        <ComboBox x:Name="cmb_filterType" HorizontalAlignment="Left" Margin="143,2,0,0" VerticalAlignment="Top" Width="94">
+            <ComboBoxItem Content="is"/>
+            <ComboBoxItem Content="is not"/>
+            <ComboBoxItem Content="Less than"/>
+            <ComboBoxItem Content="Bigger than"/>
+            <ComboBoxItem Content="Contains"/>
+        </ComboBox>
+        <TextBox x:Name="txt_filterExpression" HorizontalAlignment="Left" Height="23" Margin="242,2,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161"/>
+        <ListView x:Name="filter_listView" HorizontalAlignment="Stretch" Height="139" VerticalAlignment="Bottom">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Filtered" Width="84" DisplayMemberBinding="{Binding Path=Filtered}"/>
+                    <GridViewColumn Header="Property" Width="84" DisplayMemberBinding="{Binding Path=Property}"/>
+                    <GridViewColumn Header="Filter type" Width="84" DisplayMemberBinding="{Binding Path=FilterType}"/>
+                    <GridViewColumn Header="Data" Width="150" DisplayMemberBinding="{Binding Path=Data}"/>
+                    <GridViewColumn Header="Action" Width="84" DisplayMemberBinding="{Binding Path=Action}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Add Filter" HorizontalAlignment="Left" Margin="384,32,0,0" VerticalAlignment="Top" Width="103" Click="Button_Click"/>
+        <Button Content="Remove Filter" HorizontalAlignment="Left" Margin="276,33,0,0" VerticalAlignment="Top" Width="103" Click="Button_Click_1"/>
+        <ComboBox x:Name="cmb_filterAction" HorizontalAlignment="Left" Margin="408,2,0,0" VerticalAlignment="Top" Width="79">
+            <ComboBoxItem Content="Include"/>
+            <ComboBoxItem Content="Exclude"/>
+        </ComboBox>
+
+    </Grid>
+</Controls:MetroWindow>
+    
+

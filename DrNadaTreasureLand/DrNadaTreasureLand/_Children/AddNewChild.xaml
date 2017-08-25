@@ -1,0 +1,139 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand._Children.AddNewChild"
+                      ResizeMode="NoResize"
+                      Title="Add new Child"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="520"
+                      Width="975" Loaded="MetroWindow_Loaded" FontSize="15">
+    <Grid >
+        <GroupBox x:Name="groupBox" Header="Guardian Info" Height="225" VerticalAlignment="Top" Margin="446,5,10,0" FontSize="15">
+            <Grid>
+                <TextBox x:Name="txt_guardianName" HorizontalAlignment="Left" Height="20" Margin="126,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="371"/>
+                <Label x:Name="label" Content="Guardian Name" HorizontalAlignment="Left" Margin="2,7,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="rb_mother" Content="Mother" HorizontalAlignment="Left" Margin="169,42,0,0" VerticalAlignment="Top" IsChecked="True" FontSize="15"/>
+                <RadioButton x:Name="rb_father" Content="Father" HorizontalAlignment="Left" Margin="255,42,0,0" VerticalAlignment="Top" FontSize="15"/>
+                <TextBox x:Name="txt_fatherPhone" HorizontalAlignment="Left" Height="20" Margin="105,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137"/>
+                <Label x:Name="label_Copy" Content="Father Phone" HorizontalAlignment="Left" Margin="2,64,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_motherPhone" HorizontalAlignment="Left" Height="20" Margin="352,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145"/>
+                <Label x:Name="label_Copy1" Content="Mother Phone" HorizontalAlignment="Left" Margin="247,64,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_fatherJob" HorizontalAlignment="Left" Height="20" Margin="105,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="137"/>
+                <Label x:Name="label_Copy2" Content="Father Job" HorizontalAlignment="Left" Margin="2,95,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_motherJob" HorizontalAlignment="Left" Height="20" Margin="352,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145"/>
+                <Label x:Name="label_Copy3" Content="Mother Job" HorizontalAlignment="Left" Margin="247,95,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_whatsAppPhone" HorizontalAlignment="Left" Height="20" Margin="154,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="343"/>
+                <Label x:Name="label_Copy4" Content="WhatsApp Number" HorizontalAlignment="Left" Margin="2,126,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_motherQualification" HorizontalAlignment="Left" Height="20" Margin="154,159,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="343"/>
+                <Label x:Name="label_Copy5" Content="Mother Qualification" HorizontalAlignment="Left" Margin="2,156,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy7" Content="Guardian Type" HorizontalAlignment="Left" Margin="2,36,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox_Copy" Header="Child Info" Height="474" VerticalAlignment="Top" Margin="5,5,532,0">
+            <Grid>
+                <TextBox x:Name="txt_childName" HorizontalAlignment="Left" Height="20" Margin="116,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="129"/>
+                <Controls:NumericUpDown x:Name="num_childAge" HorizontalAlignment="Left" Margin="309,9,0,0" VerticalAlignment="Top" Width="111" ValueChanged="num_childAge_ValueChanged"/>
+                <Label x:Name="label1" Content="Child Name" HorizontalAlignment="Left" Margin="2,6,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy6" Content="Academic Year" HorizontalAlignment="Left" Margin="2,69,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmb_childGender" HorizontalAlignment="Left" Margin="116,41,0,0" VerticalAlignment="Top" Width="304">
+                    <ComboBoxItem Content="Male"/>
+                    <ComboBoxItem Content="Female"/>
+                </ComboBox>
+                <Label x:Name="label1_Copy" Content="Gender" HorizontalAlignment="Left" Margin="2,38,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmb_childEducationType" HorizontalAlignment="Left" Margin="116,103,0,0" VerticalAlignment="Top" Width="304">
+                    <ComboBoxItem Content="Governmental Arabic"/>
+                    <ComboBoxItem Content="Governmental Experimental"/>
+                    <ComboBoxItem Content="Private - Arabic"/>
+                    <ComboBoxItem Content="Private - Other Languages"/>
+                </ComboBox>
+                <Label x:Name="label1_Copy1" Content="Education Type" HorizontalAlignment="Left" Margin="2,100,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmb_childBirthOrder" HorizontalAlignment="Left" Margin="116,134,0,0" VerticalAlignment="Top" Width="304">
+                    <ComboBoxItem Content="Lonely Child"/>
+                    <ComboBoxItem Content="The First One"/>
+                    <ComboBoxItem Content="The Middle One"/>
+                    <ComboBoxItem Content="The Last One"/>
+                </ComboBox>
+                <Label x:Name="label1_Copy2" Content="Birth Order" HorizontalAlignment="Left" Margin="2,131,0,0" VerticalAlignment="Top"/>
+                <GroupBox x:Name="groupBox1" Header="Child Traits" HorizontalAlignment="Stretch" Height="86" Margin="0,165,0,0" VerticalAlignment="Top">
+                    <Grid>
+                        <CheckBox x:Name="chk_traits_social" Content="Social" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_traits_leading" Content="Leading" HorizontalAlignment="Left" Margin="164,0,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_traits_cooperative" Content="Cooperative" HorizontalAlignment="Left" Margin="219,25,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_traits_edgy" Content="Edgy" HorizontalAlignment="Left" Margin="257,0,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_traits_goodSpeaker" Content="Good Speaker" HorizontalAlignment="Left" Margin="80,25,0,0" VerticalAlignment="Top" FontSize="15"/>
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="groupBox1_Copy" Header="How does the child deal with problems" HorizontalAlignment="Stretch" Height="84" Margin="0,259,0,0" VerticalAlignment="Top">
+                    <Grid>
+                        <CheckBox x:Name="chk_problem_askHelp" Content="Quietly asks for help" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_problem_worries" Content="Worries and get angry" HorizontalAlignment="Left" Margin="207,0,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_problem_solveProblem" Content="Tries to solve the problem" HorizontalAlignment="Left" Margin="207,25,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_problem_leaveProblem" Content="Leaves the problem totally" HorizontalAlignment="Left" Margin="1,25,0,0" VerticalAlignment="Top" FontSize="15"/>
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="groupBox1_Copy1" Header="What does the child do in free time" HorizontalAlignment="Stretch" Height="84" Margin="0,351,0,0" VerticalAlignment="Top">
+                    <Grid>
+                        <CheckBox x:Name="chk_freeTime_drawing" Content="Drawing / Coloring" HorizontalAlignment="Left" Margin="53,0,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_freeTime_games" Content="Electronic Games" HorizontalAlignment="Left" Margin="233,0,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_freeTime_handwork" Content="Handwork" HorizontalAlignment="Left" Margin="233,25,0,0" VerticalAlignment="Top" FontSize="15"/>
+                        <CheckBox x:Name="chk_freeTime_tv" Content="Watching TV" HorizontalAlignment="Left" Margin="53,25,0,0" VerticalAlignment="Top" Checked="checkBox_Copy9_Checked" FontSize="15"/>
+
+                    </Grid>
+                </GroupBox>
+                <ComboBox x:Name="cmb_childAcademicType" HorizontalAlignment="Left" Margin="116,72,0,0" VerticalAlignment="Top" Width="129" IsSynchronizedWithCurrentItem="False">
+                    <ComboBoxItem Content="Elementary school"/>
+                    <ComboBoxItem Content="Prep School"/>
+                    <ComboBoxItem Content="High School"/>
+                </ComboBox>
+                <Label x:Name="label1_Copy3" Content="Year" HorizontalAlignment="Left" Margin="253,68,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy4" Content="Age" HorizontalAlignment="Left" Margin="253,6,0,0" VerticalAlignment="Top"/>
+                <Controls:NumericUpDown x:Name="num_childAcademicYear" HorizontalAlignment="Left" Margin="309,72,0,0" VerticalAlignment="Top" Width="111"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btn_actionChild" Content="Add Child" Margin="862,445,0,10" HorizontalAlignment="Left" Width="103" Click="button_Click" FontSize="17"/>
+        <Button x:Name="button_Copy" Content="Clear Form" HorizontalAlignment="Left" Margin="754,445,0,10" Width="103" FontSize="17" Click="button_Copy_Click"/>
+        <Button x:Name="btn_delete" Content="Delete Child" HorizontalAlignment="Left" Margin="448,445,0,10" Width="116" Visibility="Visible" Click="button_Copy2_Click" FontSize="17"/>
+        <GroupBox Header="Available Classes" Height="205" VerticalAlignment="Top" Margin="446,235,10,0" Visibility="Visible">
+            <Grid>
+                <ListView x:Name="courses_listView" Margin="0,32,0,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="50">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Checked}" Checked="CheckBox_Checked_1" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="#" DisplayMemberBinding="{Binding Class.Number}"/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Course.Name}"/>
+                            <GridViewColumn Header="Instructor" DisplayMemberBinding="{Binding Instructor.Name}"/>
+                            <GridViewColumn Header="Days Per Week">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Class.DaysPerWeek}" IsSynchronizedWithCurrentItem="True" Margin="-6,0,-6,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Class.StartDate, StringFormat=d}"/>
+                            <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Class.EndDate, StringFormat=d}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label Content="Please enter an 'Age' to see the classes available to you" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            </Grid>
+        </GroupBox>
+
+
+
+    </Grid>
+    <!-- your content -->
+
+</Controls:MetroWindow>
+    
+

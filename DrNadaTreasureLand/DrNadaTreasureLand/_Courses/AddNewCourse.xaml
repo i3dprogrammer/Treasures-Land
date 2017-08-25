@@ -1,0 +1,65 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" xmlns:PropertyEditing="clr-namespace:System.Activities.Presentation.PropertyEditing;assembly=System.Activities.Presentation" x:Class="DrNadaTreasureLand._Courses.AddNewCourse"
+                      ResizeMode="NoResize"
+                      Title="Add new course"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="421.316"
+                      Width="432" Loaded="MetroWindow_Loaded" FontSize="15">
+    <Grid>
+        <GroupBox Header="Course Settings" Margin="5">
+            <Grid>
+                <TextBox x:Name="txt_courseName" HorizontalAlignment="Left" Height="24" Margin="105,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="295"/>
+                <Label Content="Course Name" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="100" Margin="0,-3,0,0"/>
+                <Controls:NumericUpDown x:Name="num_cost" HorizontalAlignment="Left" Height="6" Margin="105,31,0,0" VerticalAlignment="Top" Width="118"/>
+                <Label Content="Cost" HorizontalAlignment="Left" Height="28" Margin="1,29,0,0" VerticalAlignment="Top" Width="81"/>
+                <GroupBox Header="Targeted Age" Height="68" Margin="0,124,0,0" VerticalAlignment="Top">
+                    <Grid>
+                        <Label Content="From" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-1,0,0"/>
+                        <Label Content="To" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="184,-1,0,0"/>
+                        <Controls:NumericUpDown x:Name="num_fromYear" HorizontalAlignment="Left" Margin="49,1,0,0" VerticalAlignment="Top" Width="131"/>
+                        <Controls:NumericUpDown x:Name="num_toYear" HorizontalAlignment="Left" Margin="216,1,0,0" VerticalAlignment="Top" Width="172"/>
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Sessions" Height="105" Margin="0,197,0,0" VerticalAlignment="Top">
+                    <Grid>
+                        <Label Content="Total Sessions Count" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36,0,0"/>
+                        <Controls:NumericUpDown x:Name="num_totalSessionsCount" HorizontalAlignment="Left" Margin="154,37,0,0" VerticalAlignment="Top" Width="234"/>
+                        <Label Content="Start Date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,66,0,0"/>
+                        <DatePicker x:Name="date_start" HorizontalAlignment="Left" Margin="154,67,0,0" VerticalAlignment="Top" Width="234"/>
+                        <CheckBox x:Name="cmb_day1" Content="Monday" HorizontalAlignment="Left" Margin="35,98,0,0" VerticalAlignment="Top" Height="21" Width="93" FontSize="15"/>
+                        <CheckBox x:Name="cmb_day2" Content="Tuesday" HorizontalAlignment="Left" Margin="132,98,0,0" VerticalAlignment="Top" Height="21" Width="93" FontSize="15"/>
+                        <CheckBox x:Name="cmb_day3" Content="Wednesday" HorizontalAlignment="Left" Margin="230,98,0,0" VerticalAlignment="Top" Height="21" Width="105" FontSize="15"/>
+                        <CheckBox x:Name="cmb_day4" Content="Thursday" HorizontalAlignment="Left" Margin="35,124,0,0" VerticalAlignment="Top" Height="21" Width="93" FontSize="15"/>
+                        <CheckBox x:Name="cmb_day5" Content="Friday" HorizontalAlignment="Left" Margin="132,124,0,0" VerticalAlignment="Top" Height="21" Width="93" FontSize="15"/>
+                        <CheckBox x:Name="cmb_day6" Content="Saturday" HorizontalAlignment="Left" Margin="230,124,0,0" VerticalAlignment="Top" Height="21" Width="93" FontSize="15"/>
+                        <CheckBox x:Name="cmb_day7" Content="Sunday" HorizontalAlignment="Left" Margin="132,150,0,0" VerticalAlignment="Top" Height="21" Width="93" FontSize="15"/>
+                        <Label Content="Session Hours" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0"/>
+                        <Controls:NumericUpDown x:Name="num_sessionHours" HorizontalAlignment="Left" Margin="154,6,0,0" VerticalAlignment="Top" Width="234"/>
+                    </Grid>
+                </GroupBox>
+                <Button x:Name="btn_actionCourse" Content="Add Course" HorizontalAlignment="Left" Margin="290,307,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click_2" FontSize="17"/>
+                <Button x:Name="btn_clear" Content="Clear Form" HorizontalAlignment="Left" Margin="175,0,0,0" VerticalAlignment="Bottom" Width="110" FontSize="17" Click="btn_clear_Click"/>
+                <Button x:Name="btn_deleteCourse" Content="Delete Course" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="127" Visibility="Hidden" Click="btn_deleteCourse_Click" FontSize="17"/>
+                <Controls:NumericUpDown x:Name="num_level" HorizontalAlignment="Left" Height="6" Margin="278,31,0,0" VerticalAlignment="Top" Width="122"/>
+                <Label Content="Level" HorizontalAlignment="Left" Height="29" Margin="228,29,0,0" VerticalAlignment="Top" Width="43"/>
+                <Controls:NumericUpDown x:Name="num_pricePerChild" HorizontalAlignment="Left" Height="6" Margin="149,62,0,0" VerticalAlignment="Top" Width="251"/>
+                <Label Content="Instructor Percentage" HorizontalAlignment="Left" Height="29" Margin="0,62,0,0" VerticalAlignment="Top" Width="127"/>
+                <Label x:Name="lbl_full" Content="Full" HorizontalAlignment="Left" Margin="1,91,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+        <Controls:ToggleSwitchButton x:Name="toggle_full" Content="ToggleSwitchButton" HorizontalAlignment="Left" Height="37" Margin="153,125,0,0" VerticalAlignment="Top" Width="264" />
+
+
+    </Grid>
+
+    <!-- your content -->
+
+</Controls:MetroWindow>
+    
+

@@ -1,0 +1,36 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand.ShiftsManager"
+                      Title="Manage Courses Sessions"
+                      ResizeMode="NoResize"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="404.808"
+                      Width="424.436" FontSize="15" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <GroupBox Header="Shift courses" Margin="5,5,5,41">
+            <Grid>
+                <Label Content="Excluded Date" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,4,0,0"/>
+                <DatePicker x:Name="date_excluded" HorizontalAlignment="Left" Margin="109,7,-5,0" VerticalAlignment="Top" Width="288" Height="15"/>
+                <Button Content="Insert Date" HorizontalAlignment="Left" Margin="263,41,-5,0" VerticalAlignment="Top" Width="134" FontSize="17" Click="Button_Click"/>
+                <Button Content="Remove Selected" HorizontalAlignment="Left" Margin="109,41,0,0" VerticalAlignment="Top" Width="149" FontSize="17" Click="Button_Click_1"/>
+                <ListView x:Name="listView_excluded" HorizontalAlignment="Left" Height="155" Margin="0,136,0,-3" VerticalAlignment="Top" Width="392">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Day" Width="170" DisplayMemberBinding="{Binding Day}"/>
+                            <GridViewColumn Header="Date" Width="220" DisplayMemberBinding="{Binding Date}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label Content="For the selected courses, the following dates will&#xD;&#xA;be excluded from allowed session days." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,74,0,0" FontWeight="Bold" Height="57"/>
+                <Button Content="Add Week" HorizontalAlignment="Left" Margin="0,41,0,0" VerticalAlignment="Top" Width="104" FontSize="17" Click="Button_Click_3"/>
+
+            </Grid>
+        </GroupBox>
+        <Button Content="Save settings" Margin="286,337,0,0" VerticalAlignment="Top" FontSize="17" Click="Button_Click_2" HorizontalAlignment="Left" Width="128"/>
+
+    </Grid>
+</Controls:MetroWindow>

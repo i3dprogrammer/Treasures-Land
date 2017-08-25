@@ -1,0 +1,46 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand._Employees.AddNewEmployee"
+                      ResizeMode="NoResize"
+                      Title="Add new employee"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="298"
+                      Width="400" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <GroupBox Header="Employee Personal Information" Height="221" Margin="5,5,5,0" VerticalAlignment="Top">
+            <Grid>
+                <Label Content="Employee Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="txt_employeeName" HorizontalAlignment="Left" Height="23" Margin="101,0,-5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272"/>
+                <Label Content="Gender" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,31,0,0"/>
+                <Label Content="Age" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,31,0,0"/>
+                <ComboBox x:Name="cmb_gender" HorizontalAlignment="Left" Margin="101,31,0,0" VerticalAlignment="Top" Width="98">
+                    <ComboBoxItem Content="Male"/>
+                    <ComboBoxItem Content="Female"/>
+                </ComboBox>
+                <Controls:NumericUpDown x:Name="num_age" HorizontalAlignment="Left" Margin="245,31,-5,0" VerticalAlignment="Top" Width="128"/>
+                <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0"/>
+                <TextBox x:Name="txt_address" HorizontalAlignment="Left" Height="23" Margin="101,62,-5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272"/>
+                <Label Content="Phone" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,93,0,0"/>
+                <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="23" Margin="101,93,-5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272"/>
+                <Label Content="Qualification" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,155,0,0"/>
+                <TextBox x:Name="txt_qualifier" HorizontalAlignment="Left" Height="23" Margin="101,155,-5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272"/>
+                <Label Content="National Id" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,124,0,0"/>
+                <TextBox x:Name="txt_nationalId" HorizontalAlignment="Left" Height="23" Margin="101,124,-5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="272"/>
+
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btn_delete" Content="Delete" HorizontalAlignment="Left" Margin="5,231,0,0" VerticalAlignment="Top" Width="103" Visibility="Hidden" Click="btn_delete_Click"/>
+        <Button x:Name="btn_addEmployee" Content="Add Employee" HorizontalAlignment="Left" Margin="263,231,0,0" VerticalAlignment="Top" Width="122" Click="btn_addInstructor_Click"/>
+        <Button x:Name="btn_clear" Content="Clear Form" Height="29" HorizontalAlignment="Left" Margin="155,231,0,0" VerticalAlignment="Top" Width="103" Visibility="Visible" Click="btn_clear_Click"/>
+
+    </Grid>
+
+    <!-- your content -->
+
+</Controls:MetroWindow>
+    
+

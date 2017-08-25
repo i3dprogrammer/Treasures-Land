@@ -1,0 +1,39 @@
+﻿<Controls:MetroWindow
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:Objects="clr-namespace:TreasuresLand.Objects;assembly=TreasuresLand" x:Class="DrNadaTreasureLand._Employees.EmployeeProfile"
+                      ResizeMode="NoResize"
+                      Title="Ahmed Profile"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="2"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      Height="288.1"
+                      Width="420" Loaded="MetroWindow_Loaded" FontSize="15">
+    <Grid>
+        <GroupBox Header="Employee Personal Information" HorizontalAlignment="Stretch" Height="210" Margin="5,5,5,0" VerticalAlignment="Top">
+            <Grid>
+                <Label Content="Name: " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="lbl_name" Content="Ahmed Magdy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,0,0,0" FontWeight="Bold"/>
+                <Label Content="Age:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,27,0,0"/>
+                <Label x:Name="lbl_age" Content="22 Years Old" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,27,0,0" FontWeight="Bold"/>
+                <Label Content="Gender:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="204,27,0,0"/>
+                <Label x:Name="lbl_gender" Content="Female" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="271,27,0,0" FontWeight="Bold"/>
+                <Label Content="Address:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,57,0,0"/>
+                <Label x:Name="lbl_address" Content="53 Shorafa Street - Madkoor - Feisal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="71,57,0,0" FontWeight="Bold"/>
+                <Label Content="Phone:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,84,0,0"/>
+                <Label x:Name="lbl_phone" Content="+201120699180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,84,0,0" FontWeight="Bold"/>
+                <Label Content="Qualification:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,110,0,0"/>
+                <Label x:Name="lbl_qualifier" Content="Bachelors" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="97,110,0,0" FontWeight="Bold"/>
+                <Label Content="National Id:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,140,0,0"/>
+                <Label x:Name="lbl_nationalId" Content="219123123123141" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="91,140,0,0" FontWeight="Bold"/>
+
+            </Grid>
+        </GroupBox>
+        <Button Content="Print Profile" HorizontalAlignment="Left" Height="31" Margin="289,220,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click_1" FontSize="17"/>
+
+    </Grid>
+
+</Controls:MetroWindow>
+    
+

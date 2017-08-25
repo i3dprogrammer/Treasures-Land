@@ -1,0 +1,108 @@
+CREATE TABLE [Courses] (
+    [Id]                INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [Name]              NVARCHAR (50) NOT NULL,
+    [AcademicYearStart] INT           NOT NULL,
+    [AcademicYearEnd]   INT           NOT NULL,
+    [Cost]              INT           NOT NULL,
+    [PricePerChild]     INT           NOT NULL,
+    [Level]             INT           NOT NULL,
+    [TotalSessions]     INT           NOT NULL,
+    [SessionDuration]   INT           NOT NULL
+);
+
+CREATE TABLE [CourseClasses] (
+    [Id]           INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [Number]       INT         NOT NULL,
+    [StartDate]    DATE        NOT NULL,
+    [StartTime]    TIME        NULL,
+    [EndTime]      TIME        NULL,
+    [Full]         BIT         NOT NULL,
+    [Over]         BIT         NOT NULL,
+    [CourseId]     INT         NOT NULL,
+    CONSTRAINT [FK_CourseClasses_ToCourses] FOREIGN KEY ([CourseId]) REFERENCES [Courses] ([Id])
+);
+
+CREATE TABLE [ClassSessions] (
+    [ClassId]      INT               NOT NULL,
+    [SessionDay]   NVARCHAR (50)     NOT NULL,
+    CONSTRAINT [FK_ClassSessions_ToCourseClasses] FOREIGN KEY ([ClassId]) REFERENCES [CourseClasses] ([Id])
+);
+
+CREATE TABLE [ClassShiftedDays] (
+    [ClassId]        INT           NOT NULL,
+    [ShiftedDate]    DATE          NOT NULL,
+    CONSTRAINT [FK_ClassShiftedDays_ToCourseClasses] FOREIGN KEY ([ClassId]) REFERENCES [CourseClasses] ([Id])
+);
+
+CREATE TABLE [Children] (
+    [Active]          BIT           DEFAULT 0           NOT NULL,
+    [Id]              INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [Name]            NVARCHAR (50) NOT NULL,
+    [Age]             INT           NOT NULL,
+    [Gender]          INT           NOT NULL,
+    [WhatsAppPhone]   NVARCHAR (50) NULL,
+    [AcademicYear]    INT           NOT NULL,
+    [EducationType]   INT           NOT NULL,
+    [ChildBirthOrder] INT           NULL,
+    [ChildTraits]     NVARCHAR (50) NULL,
+    [ChildHandling]   NVARCHAR (50) NULL,
+    [ChildFreeTime]   NVARCHAR (50) NULL,
+    [GuardianName]    NVARCHAR (50) NOT NULL,
+    [GuardianType]    INT           NOT NULL,
+    [MotherPhone]     NVARCHAR (50) NULL,
+    [FatherPhone]     NVARCHAR (50) NULL,
+    [MotherJob]       NVARCHAR (50) NULL,
+    [FatherJob]       NVARCHAR (50) NULL,
+    [MotherQualifier] NVARCHAR (50) NOT NULL
+);
+
+CREATE TABLE [ChildrenClasses] (
+    [ChildId]    INT           NOT NULL,
+    [ClassId]   INT           NOT NULL,
+    CONSTRAINT [FK_ChildrenClasses_ToChildren] FOREIGN KEY ([ChildId]) REFERENCES [Children] ([Id]),
+    CONSTRAINT [FK_ChildrenClasses_ToCourseClasses] FOREIGN KEY ([ClassId]) REFERENCES [CourseClasses] ([Id])
+);
+
+CREATE TABLE [Employees] (
+    [Id]         INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [Name]       NVARCHAR (50) NOT NULL,
+    [Address]    NVARCHAR (50) NOT NULL,
+    [Phone]      NVARCHAR (50) NOT NULL,
+    [NationalID] NVARCHAR (50) NOT NULL,
+    [Qualifier]  NVARCHAR (50) NOT NULL,
+    [Gender]     INT           NOT NULL,
+    [Age]        INT           NOT NULL
+);
+
+CREATE TABLE [Instructors] (
+    [Id]        INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    [Name]      NVARCHAR (50)   NOT NULL,
+    [Address]   NVARCHAR (50)   NOT NULL,
+    [Phone]     NVARCHAR (50)   NOT NULL,
+    [Qualifier] NVARCHAR (50)   NOT NULL,
+    [CV]        VARBINARY (2147483647) NULL,
+    [Gender]    INT             NOT NULL,
+    [Age]       INT             NOT NULL
+);
+
+CREATE TABLE [InstructorClasses] (
+    [InstructorId]    INT           NOT NULL,
+    [ClassId]         INT           NOT NULL,
+    CONSTRAINT [FK_ChildrenClasses_ToInstructors] FOREIGN KEY ([InstructorId]) REFERENCES [Instructors] ([Id]),
+    CONSTRAINT [FK_ChildrenClasses_ToCourseClasses] FOREIGN KEY ([ClassId]) REFERENCES [CourseClasses] ([Id])
+);
+
+CREATE TABLE [InstructorSalary] (
+    [InstructorId] INT NOT NULL,
+    [CourseId]     INT NOT NULL,
+    [Salary]       INT NOT NULL,
+    [Paid]         BIT NOT NULL,
+    CONSTRAINT [FK_InstructorSalary_ToInstructor] FOREIGN KEY ([InstructorId]) REFERENCES [Instructors] ([Id])
+);
+
+CREATE TABLE [InstructorAbsence] (
+    [InstructorId] INT  NOT NULL,
+    [Month]        DATE NOT NULL,
+    [Hours]        INT  NOT NULL,
+    CONSTRAINT [FK_InstructorAbsence_ToInstructors] FOREIGN KEY ([InstructorId]) REFERENCES [Instructors] ([Id])
+);
