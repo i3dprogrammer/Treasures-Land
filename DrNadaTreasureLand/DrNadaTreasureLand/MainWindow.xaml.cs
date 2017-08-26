@@ -34,11 +34,12 @@ namespace DrNadaTreasureLand
             {
                 Globals.MainWindow = this;
                 InitializeComponent();
-                //this.MinHeight = this.Height;
-                //this.MinWidth = this.Width;
+                this.MinHeight = this.Height;
+                this.MinWidth = this.Width;
+                flyout.IsOpen = true;
             } catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
 
@@ -49,28 +50,20 @@ namespace DrNadaTreasureLand
                 //Connection.CreateDatabase();
                 //Connection.Connect();
                 //Connection.CreateTables();
+                //var str = EncryptPass("AhmedMagdy");
+                //SaveEncPassword(str);
                 //return;
 
-                Connection.Connect();
+                if (GetEncPassword().Count() == 0)
+                    grb_enterPw.IsEnabled = false;
+                else
+                    grb_createPw.IsEnabled = false;
 
-                Globals.RefreshReferenceInformation();
-
-                coursesRefreshTimer = new Timer(500);
-                coursesRefreshTimer.Elapsed += CoursesRefreshTimer_Elapsed;
-                coursesRefreshTimer.Start();
-
-                mainRefreshTimer = new Timer(5000);
-                mainRefreshTimer.Elapsed += MainRefreshTimer_Elapsed;
-                mainRefreshTimer.Start();
-
-                MainRefreshTimer_Elapsed(null, null);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
-
-
         }
 
         private void MainRefreshTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -231,7 +224,6 @@ namespace DrNadaTreasureLand
                 target += 7;
             return from.AddDays(target - start);
         }
-
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
@@ -598,14 +590,127 @@ namespace DrNadaTreasureLand
             newFilter.ShowDialog();
         }
 
-        private byte[] EncryptPass(string pass, string entropy)
+        private byte[] EncryptPass(string pass)
         {
-            return ProtectedData.Protect(Encoding.ASCII.GetBytes(pass), Encoding.ASCII.GetBytes(entropy), DataProtectionScope.CurrentUser);
+            byte[] entropy = GetEntropy();
+
+            if (entropy.Count() == 0)
+            {
+                entropy = new byte[20];
+                using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                {
+                    rng.GetBytes(entropy);
+                }
+                SaveEntropy(entropy);
+            }
+
+            return ProtectedData.Protect(Encoding.UTF8.GetBytes(pass), entropy, DataProtectionScope.CurrentUser);
         }
 
-        //private byte[] DecryptPass(string encryption, string entropy) //Not Needed
-        //{
-        //    return ProtectedData.Unprotect(Encoding.ASCII.GetBytes(encryption), Encoding.ASCII.GetBytes(entropy), DataProtectionScope.CurrentUser);
-        //}
+        private string GetDecrpytedPass()
+        {
+            if (GetEncPassword().Count() == 0 || GetEntropy().Count() == 0)
+                return "";
+            return Encoding.UTF8.GetString(ProtectedData.Unprotect(GetEncPassword(), GetEntropy(), DataProtectionScope.CurrentUser));
+        }
+
+        private void SaveEncPassword(byte[] encPassword)
+        {
+            Microsoft.Win32.Registry.SetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "encryption", encPassword, Microsoft.Win32.RegistryValueKind.Binary);
+        }
+
+        private void SaveEntropy(byte[] entropy)
+        {
+            Microsoft.Win32.Registry.SetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "entropy", entropy, Microsoft.Win32.RegistryValueKind.Binary);
+        }
+
+        private byte[] GetEncPassword()
+        {
+            return (byte[]) Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "encryption", new byte[] { });
+        }
+
+        private byte[] GetEntropy()
+        {
+            return (byte[])Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "entropy", new byte[] { });
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            flyout.IsOpen = !flyout.IsOpen;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if(GetEncPassword().Count() != 0)
+            {
+                if (GetDecrpytedPass() != txt_currentPass.Text)
+                {
+                    lbl_passCreationStatus.Content = "Current password is wrong.";
+                    return;
+                }
+            }
+
+            if(txt_pass.Text != txt_confirmPass.Text)
+            {
+                lbl_passCreationStatus.Content = "Passwords doesn't match!";
+                return;
+            }
+
+            SaveEncPassword(EncryptPass(txt_pass.Text));
+
+            lbl_passCreationStatus.Content = "Password Created/Changed, enter it now.";
+            grb_createPw.IsEnabled = false;
+            grb_enterPw.IsEnabled = true;
+            btn_checkIn.IsEnabled = true;
+            metroAnimatedTabControl.IsEnabled = false;
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (GetEncPassword().Count() == 0)
+            {
+                grb_enterPw.IsEnabled = false;
+                grb_createPw.IsEnabled = true;
+                lbl_passStatus.Content = "There's no password, create new one.";
+                return;
+            }
+            else
+                grb_createPw.IsEnabled = false;
+
+            if (GetDecrpytedPass() == txt_enteredPass.Text)
+            {
+                lbl_passStatus.Content = "Logged successfully.";
+                flyout.IsOpen = false;
+
+                Connection.Connect();
+
+                Globals.RefreshReferenceInformation();
+
+                coursesRefreshTimer = new Timer(500);
+                coursesRefreshTimer.Elapsed += CoursesRefreshTimer_Elapsed;
+                coursesRefreshTimer.Start();
+
+                mainRefreshTimer = new Timer(5000);
+                mainRefreshTimer.Elapsed += MainRefreshTimer_Elapsed;
+                mainRefreshTimer.Start();
+
+                MainRefreshTimer_Elapsed(null, null);
+
+                metroAnimatedTabControl.IsEnabled = true;
+                btn_checkIn.IsEnabled = false;
+                grb_createPw.IsEnabled = true;
+            } else
+            {
+                lbl_passStatus.Content = "Wrong password.";
+            }
+        }
+
+        private async void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            if(await this.ShowMessageAsync("Warning", "Are you sure you want to reset the database, this will delete all existing information", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
+            {
+                //TODO: Clean Database.
+            }
+        }
     }
 }

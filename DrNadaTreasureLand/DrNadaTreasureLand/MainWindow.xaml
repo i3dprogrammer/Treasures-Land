@@ -12,7 +12,7 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <!--<Button Content="Configuration"/>-->
-            <Button>
+            <Button Click="Button_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
                    Height="20"
@@ -29,7 +29,7 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" Margin="-4,-3,0,0" VerticalAlignment="Stretch">
-        <Controls:MetroAnimatedTabControl x:Name="metroAnimatedTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,0,0">
+        <Controls:MetroAnimatedTabControl x:Name="metroAnimatedTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,0,0" IsEnabled="False">
             <TabItem Header="Main">
                 <Grid Background="#FFE5E5E5">
                     <GroupBox Header="Statistics" HorizontalAlignment="Left" Margin="0,392,0,0" VerticalAlignment="Stretch" Width="500">
@@ -260,8 +260,34 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-          
+
         </Controls:MetroAnimatedTabControl>
+        <Controls:Flyout x:Name="flyout" Header="Settings" Position="Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:MetroWindow}, Path=ActualWidth}">
+            <Grid>
+                <GroupBox x:Name="grb_createPw" Header="Password Creation" HorizontalAlignment="Stretch" Height="180" Margin="10,0,0,0" VerticalAlignment="Top">
+                    <Grid>
+                        <Label Content="Password: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,308,0"/>
+                        <TextBox x:Name="txt_pass" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Margin="167,4,0,0"/>
+                        <Button Content="Create / Change" HorizontalAlignment="Right" VerticalAlignment="Top" Width="385" FontSize="18" Height="39" Margin="572,98,0,0" Click="Button_Click_1"/>
+                        <Label Content="Confirm Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,32,0,0"/>
+                        <TextBox x:Name="txt_confirmPass" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Margin="167,36,0,0"/>
+                        <Label Content="Current Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,63,0,0"/>
+                        <TextBox x:Name="txt_currentPass" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Margin="167,67,311,0"/>
+                        <Label Content="Leave current password blank if there's none." HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,63,-2,0"/>
+                        <Label x:Name="lbl_passCreationStatus" Content="...." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="167,107,0,0" FontWeight="Bold" Width="408"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox x:Name="grb_enterPw" Header="Password Entry" HorizontalAlignment="Stretch" Height="180" Margin="10,185,0,0" VerticalAlignment="Top">
+                    <Grid>
+                        <Label Content="Password: " HorizontalAlignment="Center" VerticalAlignment="Center" Margin="308,17,569,94"/>
+                        <TextBox x:Name="txt_enteredPass" HorizontalAlignment="Center" VerticalAlignment="Center" Width="254" Height="20" Margin="386,19,317,96"/>
+                        <Button x:Name="btn_checkIn" Content="Check In" HorizontalAlignment="Center" VerticalAlignment="Top" Width="332" FontSize="18" Height="39" Margin="308,80,317,0" Click="Button_Click_3"/>
+                        <Label x:Name="lbl_passStatus" Content="...." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="310,50,318,61" FontWeight="Bold" Width="332"/>
+                    </Grid>
+                </GroupBox>
+                <Button Content="Reset Database" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18" FontWeight="Bold" Margin="10,370,10,10" Click="Button_Click_4"/>
+            </Grid>
+        </Controls:Flyout>
     </Grid>
 
     <!-- your content -->
