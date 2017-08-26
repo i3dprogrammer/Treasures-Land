@@ -103,7 +103,13 @@ namespace DrNadaTreasureLand
             {
                 if(item.StartDate == null || item.EndDate == null)
                 {
-                    await this.ShowMessageAsync("", "Cannot SHIFT classes with no Start Date");
+                    await this.ShowMessageAsync("", "Cannot SHIFT classes with no Start Date.");
+                    Close();
+                }
+
+                if(item.EndDate != null && item.EndDate <= DateTime.Now)
+                {
+                    await this.ShowMessageAsync("", "Cannot SHIFT, some classes are already over.");
                     Close();
                 }
             }

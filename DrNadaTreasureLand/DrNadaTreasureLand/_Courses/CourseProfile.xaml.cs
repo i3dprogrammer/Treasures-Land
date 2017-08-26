@@ -56,25 +56,13 @@ namespace DrNadaTreasureLand._Courses
                 this.Title = c.Name + " Properties";
                 lbl_courseName.Content = c.Name;
                 lbl_cost.Content = c.Cost + " (" + CashType + ")";
-
                 lbl_from.Content = c.AcademicYearStart + " Years old";
                 lbl_to.Content = c.AcademicYearEnd + " Years old";
                 lbl_level.Content = c.Level;
-
-                //lbl_startDate.Content = c.StartDate.Month + "/" + c.StartDate.Day + "/" + c.StartDate.Year;
-                //lbl_endDate.Content = c.EndDate.Month + "/" + c.EndDate.Day + "/" + c.EndDate.Year;
                 lbl_totalSessions.Content = c.TotalSessions + " Days";
-                //txtb_sesssionDays.Text = c.DaysPerWeek.Aggregate((x, y) => x + ", " + y) + "\n----";
                 lbl_salaryPerChild.Content = c.PricePerChild + "%";
 
-                //lbl_status.Content = (c.Full) ? "Full" : "Vacant";
                 lbl_sessionHours.Content = c.SessionDuration + " Hours";
-
-                //if (Globals.Instructors.ToList().Exists(y => y.Value.TeachingCourses.Contains(c)))
-                //    lbl_insName.Content = Globals.Instructors.ToList().First(y => y.Value.TeachingCourses.Contains(c)).Value.Name;
-                //else
-                //    lbl_insName.Content = "----";
-
 
                 foreach (var item in (Globals.Children.ToList().Where(x => x.Value.RegisteredCourses.Exists(y => y.CourseId == c.Id))))
                 {
@@ -92,6 +80,7 @@ namespace DrNadaTreasureLand._Courses
                 }
 
                 lbl_totalChildren.Content = listView_children.Items.Count;
+
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n" + ex.StackTrace);

@@ -29,6 +29,12 @@ namespace TreasuresLand.SQL
 
         public static void Connect()
         {
+            if (!File.Exists(".\\MainDB.sqlite"))
+            { 
+                CreateDatabase();
+                CreateTables();
+            }
+
             if(conn.State == System.Data.ConnectionState.Closed)
                 conn.Open();
         }
@@ -55,139 +61,3 @@ namespace TreasuresLand.SQL
         //}
     }
 }
-
-
-
-/*
-Data Source=JA7IM\SQLEXPRESS;Integrated Security=True;;MultipleActiveResultSets=true
-
-CREATE TABLE [dbo].[Children] ([Id] INT IDENTITY (1, 1) NOT NULL, [Name] NVARCHAR (50) NOT NULL, [Age]             INT           NOT NULL,
-    [Gender]          INT           NOT NULL,
-    [WhatsAppPhone]   NVARCHAR (50) NULL,
-    [AcademicYear]    INT           NOT NULL,
-    [EducationType]   INT           NOT NULL,
-    [ChildBirthOrder] INT           NULL,
-    [ChildTraits]     NVARCHAR (50) NULL,
-    [ChildHandling]   NVARCHAR (50) NULL,
-    [ChildFreeTime]   NVARCHAR (50) NULL,
-    [GuardianName]    NVARCHAR (50) NOT NULL,
-    [GuardianType]    INT           NOT NULL,
-    [MotherPhone]     NVARCHAR (50) NULL,
-    [FatherPhone]     NVARCHAR (50) NULL,
-    [MotherJob]       NVARCHAR (50) NULL,
-    [FatherJob]       NVARCHAR (50) NULL,
-    [MotherQualifier] NVARCHAR (50) NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-GO
-
-CREATE TABLE [dbo].[Courses] (
-    [Id]                INT           IDENTITY (1, 1) NOT NULL,
-    [Name]              NVARCHAR (50) NOT NULL,
-    [AcademicYearStart] INT           NOT NULL,
-    [AcademicYearEnd]   INT           NOT NULL,
-    [Cost]              INT           NOT NULL,
-    [PricePerChild]     INT           NOT NULL,
-    [Full]              BIT           NOT NULL,
-    [Over]              BIT           NOT NULL,
-    [Level]             INT           NOT NULL,
-    [StartDate]         DATE          NOT NULL,
-    [EndDate]           DATE          NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-GO
-
-CREATE TABLE [dbo].[ChildrenCourses] (
-    [ChildId]    INT           NOT NULL,
-    [CourseId]   INT           NOT NULL,
-    [Attendance] NVARCHAR (50) NULL,
-    CONSTRAINT [FK_ChildrenCourses_ToChildren] FOREIGN KEY ([ChildId]) REFERENCES [dbo].[Children] ([Id]),
-    CONSTRAINT [FK_ChildrenCourses_ToCourses] FOREIGN KEY ([CourseId]) REFERENCES [dbo].[Courses] ([Id])
-);
-GO
-
-CREATE TABLE [dbo].[CourseSessions] (
-    [Id]        INT           IDENTITY (1, 1) NOT NULL,
-    [Name]      NVARCHAR (50) NULL,
-    [CourseId]  INT           NOT NULL,
-    [Number]    INT           NOT NULL,
-    [StartDate] DATETIME      NOT NULL,
-    [EndDate]   DATETIME      NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_CourseSessions_ToCourses] FOREIGN KEY ([CourseId]) REFERENCES [dbo].[Courses] ([Id])
-);
-GO
-
-CREATE TABLE [dbo].[Employees] (
-    [Id]         INT           IDENTITY (1, 1) NOT NULL,
-    [Name]       NVARCHAR (50) NOT NULL,
-    [Address]    NVARCHAR (50) NOT NULL,
-    [Phone]      NVARCHAR (50) NOT NULL,
-    [NationalID] NVARCHAR (50) NOT NULL,
-    [Qualifier]  NVARCHAR (50) NOT NULL,
-    [Gender]     INT           NOT NULL,
-    [Age]        INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-GO
-
-CREATE TABLE [dbo].[EmployeeWorkingHours] (
-    [Id]             INT      NOT NULL,
-    [FridayStart]    TIME (7) NOT NULL,
-    [FridayEnd]      TIME (7) NOT NULL,
-    [SaturdayStart]  TIME (7) NOT NULL,
-    [SaturdayEnd]    TIME (7) NOT NULL,
-    [SundayStart]    TIME (7) NOT NULL,
-    [SundayEnd]      TIME (7) NOT NULL,
-    [MondayStart]    TIME (7) NOT NULL,
-    [MondayEnd]      TIME (7) NOT NULL,
-    [TuesdayStart]   TIME (7) NOT NULL,
-    [TuesdayEnd]     TIME (7) NOT NULL,
-    [WednesdayStart] TIME (7) NOT NULL,
-    [WednesdayEnd]   TIME (7) NOT NULL,
-    [ThursdayStart]  TIME (7) NOT NULL,
-    [ThursdayEnd]    TIME (7) NOT NULL,
-    CONSTRAINT [FK_EmployeeWorkingHours_ToEmployees] FOREIGN KEY ([Id]) REFERENCES [dbo].[Employees] ([Id])
-);
-GO
-
-CREATE TABLE [dbo].[Instructors] (
-    [Id]        INT             IDENTITY (1, 1) NOT NULL,
-    [Name]      NVARCHAR (50)   NOT NULL,
-    [Address]   NVARCHAR (50)   NOT NULL,
-    [Phone]     NVARCHAR (50)   NOT NULL,
-    [Qualifier] NVARCHAR (50)   NOT NULL,
-    [CV]        VARBINARY (MAX) NOT NULL,
-    [Gender]    INT             NOT NULL,
-    [Age]       INT             NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-GO
-
-CREATE TABLE [dbo].[InstructorCourses] (
-    [InstructorId] INT NOT NULL,
-    [CourseId]     INT NOT NULL,
-    CONSTRAINT [FK_InstructorCourses_ToCoaches] FOREIGN KEY ([InstructorId]) REFERENCES [dbo].[Instructors] ([Id]),
-    CONSTRAINT [FK_InstructorCourses_ToCourses] FOREIGN KEY ([CourseId]) REFERENCES [dbo].[Courses] ([Id])
-);
-GO
-
-CREATE TABLE [dbo].[InstructorAbsence] (
-    [InstructorId] INT  NOT NULL,
-    [Month]        DATE NOT NULL,
-    [Hours]        INT  NOT NULL,
-    CONSTRAINT [FK_InstructorAbsence_ToInstructors] FOREIGN KEY ([InstructorId]) REFERENCES [dbo].[Instructors] ([Id])
-);
-GO
-
-CREATE TABLE [dbo].[InstructorSalary] (
-    [InstructorId] INT NOT NULL,
-    [CourseId]     INT NOT NULL,
-    [Salary]       INT NOT NULL,
-    [Paid]         BIT NOT NULL,
-    CONSTRAINT [FK_InstructorSalary_ToInstructor] FOREIGN KEY ([InstructorId]) REFERENCES [dbo].[Instructors] ([Id])
-);
-GO
-
-
-*/

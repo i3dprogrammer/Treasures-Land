@@ -17,6 +17,7 @@ using System.Timers;
 using TreasuresLand.SQL;
 using TreasuresLand.Objects;
 using MahApps.Metro.Controls.Dialogs;
+using System.Security.Cryptography;
 
 namespace DrNadaTreasureLand
 {
@@ -54,11 +55,10 @@ namespace DrNadaTreasureLand
 
                 Globals.RefreshReferenceInformation();
 
-                //coursesRefreshTimer = new Timer(500);
-                //coursesRefreshTimer.Elapsed += CoursesRefreshTimer_Elapsed;
-                //coursesRefreshTimer.Start();
+                coursesRefreshTimer = new Timer(500);
+                coursesRefreshTimer.Elapsed += CoursesRefreshTimer_Elapsed;
+                coursesRefreshTimer.Start();
 
-                //mainRefreshTimer = new Timer(300000);
                 mainRefreshTimer = new Timer(5000);
                 mainRefreshTimer.Elapsed += MainRefreshTimer_Elapsed;
                 mainRefreshTimer.Start();
@@ -168,34 +168,41 @@ namespace DrNadaTreasureLand
         }
 
         private void CoursesRefreshTimer_Elapsed(object sender, ElapsedEventArgs e)
-        { //TODO: TEST THIS
-            Globals.Courses.ToList().ForEach(x =>
+        {   //TODO: TEST THIS
+            bool refreshData = false;
+
+            Globals.Courses.ToList().ForEach(x => //Get every course and loop through, x.Value = course
             {
-                foreach(var y in x.Value.Classes)
+                foreach (var y in x.Value.Classes) //Loop through every class in the course
                 {
-                    if (y.EndDate <= DateTime.Now.Date && y.Over == false)
+                    if (y.EndDate <= DateTime.Now.Date && y.Over == false) //If we passed the end date AND the class is not over yet
                     {
                         if (!Globals.Instructors.ToList().Exists(z => z.Value.TeachingCourses.Contains(y)))
-                        { //Incase of the class having no instructor, should not happen as we MUST add the class with instructor.
+                        {   //Incase of the class having no instructor, should not happen as we MUST add the class with instructor.
                             Classes.RemoveCourseClass(y);
                             throw new Exception("There is no instructor assigned to " + y.Course.Name + " class, this shouldn't happen.");
                         }
 
-                        var ins = Globals.Instructors.ToList().Single(z => z.Value.TeachingCourses.Contains(y)).Value;
+                        var ins = Globals.Instructors.ToList().Single(z => z.Value.TeachingCourses.Contains(y)).Value; //Get the class instructor
                         int childCount = Globals.Children.ToList().Where(z => z.Value.RegisteredCourses.Contains(y)).Count(); //Get Children Count taking this class.
+
                         Instructors.AddInstructorSalary(ins.Id, y.CourseId, x.Value.PricePerChild * x.Value.Cost * childCount / 100); //Add Salary
 
-                        foreach(var child in Globals.Children.ToList().Where(z => z.Value.RegisteredCourses.Contains(y)))
+                        foreach (var child in Globals.Children.ToList().Where(z => z.Value.RegisteredCourses.Contains(y))) //Remove every child from the class
                         {
                             Children.RemoveChildClass(y.Id);
                         }
 
-                        y.Over = true;
-                        Classes.EditCourseClass(y);
-                        Globals.RefreshReferenceInformation();
+                        y.Over = true; //Set over to true
+                        Classes.EditCourseClass(y); //Edit the course in the db set over to true
+                        refreshData = true;
                     }
                 }
             });
+
+            if(refreshData)
+                Globals.RefreshReferenceInformation(); //Refresh db information
+
         }
 
         private void UpdateCoursesListView(Course item)
@@ -508,9 +515,7 @@ namespace DrNadaTreasureLand
 
             listView_salaryHistory.Items.Clear();
             if (Globals.InstructorSalaries.ContainsKey(selectedId))
-            {
                 Globals.InstructorSalaries[selectedId].ForEach(x => listView_salaryHistory.Items.Add(x));
-            }
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
@@ -592,5 +597,15 @@ namespace DrNadaTreasureLand
             newFilter.filters = filters;
             newFilter.ShowDialog();
         }
+
+        private byte[] EncryptPass(string pass, string entropy)
+        {
+            return ProtectedData.Protect(Encoding.ASCII.GetBytes(pass), Encoding.ASCII.GetBytes(entropy), DataProtectionScope.CurrentUser);
+        }
+
+        //private byte[] DecryptPass(string encryption, string entropy) //Not Needed
+        //{
+        //    return ProtectedData.Unprotect(Encoding.ASCII.GetBytes(encryption), Encoding.ASCII.GetBytes(entropy), DataProtectionScope.CurrentUser);
+        //}
     }
 }
