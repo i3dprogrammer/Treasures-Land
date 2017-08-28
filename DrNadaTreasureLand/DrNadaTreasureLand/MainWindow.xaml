@@ -264,7 +264,7 @@
         </Controls:MetroAnimatedTabControl>
         <Controls:Flyout x:Name="flyout" Header="Settings" Position="Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:MetroWindow}, Path=ActualWidth}">
             <Grid>
-                <GroupBox x:Name="grb_createPw" Header="Password Creation" HorizontalAlignment="Stretch" Height="180" Margin="10,0,0,0" VerticalAlignment="Top">
+                <GroupBox x:Name="grp_createPw" Header="Password Creation" HorizontalAlignment="Stretch" Height="180" Margin="10,0,0,0" VerticalAlignment="Top">
                     <Grid>
                         <Label Content="Password: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,308,0"/>
                         <TextBox x:Name="txt_pass" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Margin="167,4,0,0"/>
@@ -277,7 +277,7 @@
                         <Label x:Name="lbl_passCreationStatus" Content="...." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="167,107,0,0" FontWeight="Bold" Width="408"/>
                     </Grid>
                 </GroupBox>
-                <GroupBox x:Name="grb_enterPw" Header="Password Entry" HorizontalAlignment="Stretch" Height="180" Margin="10,185,0,0" VerticalAlignment="Top">
+                <GroupBox x:Name="grp_enterPw" Header="Password Entry" HorizontalAlignment="Stretch" Height="180" Margin="10,185,0,0" VerticalAlignment="Top">
                     <Grid>
                         <Label Content="Password: " HorizontalAlignment="Center" VerticalAlignment="Center" Margin="308,17,569,94"/>
                         <TextBox x:Name="txt_enteredPass" HorizontalAlignment="Center" VerticalAlignment="Center" Width="254" Height="20" Margin="386,19,317,96"/>

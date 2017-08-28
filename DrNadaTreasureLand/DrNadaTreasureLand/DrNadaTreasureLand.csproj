@@ -94,6 +94,8 @@
     <Compile Include="ShiftsManager.xaml.cs">
       <DependentUpon>ShiftsManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\RegistryManager.cs" />
+    <Compile Include="Utilities\Security.cs" />
     <Compile Include="_Children\AddNewChild.xaml.cs">
       <DependentUpon>AddNewChild.xaml</DependentUpon>
     </Compile>

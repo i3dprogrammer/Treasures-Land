@@ -1,23 +1,15 @@
-﻿using System;
+﻿using DrNadaTreasureLand.Utilities;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MahApps.Metro.Controls;
-using System.Timers;
-using TreasuresLand.SQL;
 using TreasuresLand.Objects;
-using MahApps.Metro.Controls.Dialogs;
-using System.Security.Cryptography;
+using TreasuresLand.SQL;
 
 namespace DrNadaTreasureLand
 {
@@ -54,10 +46,10 @@ namespace DrNadaTreasureLand
                 //SaveEncPassword(str);
                 //return;
 
-                if (GetEncPassword().Count() == 0)
-                    grb_enterPw.IsEnabled = false;
+                if (RegistryManager.GetEncryptedPass() == null)
+                    grp_enterPw.IsEnabled = false;
                 else
-                    grb_createPw.IsEnabled = false;
+                    grp_createPw.IsEnabled = false;
 
             }
             catch (Exception ex)
@@ -590,50 +582,6 @@ namespace DrNadaTreasureLand
             newFilter.ShowDialog();
         }
 
-        private byte[] EncryptPass(string pass)
-        {
-            byte[] entropy = GetEntropy();
-
-            if (entropy.Count() == 0)
-            {
-                entropy = new byte[20];
-                using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-                {
-                    rng.GetBytes(entropy);
-                }
-                SaveEntropy(entropy);
-            }
-
-            return ProtectedData.Protect(Encoding.UTF8.GetBytes(pass), entropy, DataProtectionScope.CurrentUser);
-        }
-
-        private string GetDecrpytedPass()
-        {
-            if (GetEncPassword().Count() == 0 || GetEntropy().Count() == 0)
-                return "";
-            return Encoding.UTF8.GetString(ProtectedData.Unprotect(GetEncPassword(), GetEntropy(), DataProtectionScope.CurrentUser));
-        }
-
-        private void SaveEncPassword(byte[] encPassword)
-        {
-            Microsoft.Win32.Registry.SetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "encryption", encPassword, Microsoft.Win32.RegistryValueKind.Binary);
-        }
-
-        private void SaveEntropy(byte[] entropy)
-        {
-            Microsoft.Win32.Registry.SetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "entropy", entropy, Microsoft.Win32.RegistryValueKind.Binary);
-        }
-
-        private byte[] GetEncPassword()
-        {
-            return (byte[]) Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "encryption", new byte[] { });
-        }
-
-        private byte[] GetEntropy()
-        {
-            return (byte[])Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\DrNadaTreasureLand", "entropy", new byte[] { });
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             flyout.IsOpen = !flyout.IsOpen;
@@ -641,43 +589,44 @@ namespace DrNadaTreasureLand
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if(GetEncPassword().Count() != 0)
+            if(RegistryManager.GetEncryptedPass() != null) //Checks if there's and old password
             {
-                if (GetDecrpytedPass() != txt_currentPass.Text)
+                if (RegistryManager.GetDecryptedPass() != txt_currentPass.Text) //If there's, compare it with the new one.
                 {
                     lbl_passCreationStatus.Content = "Current password is wrong.";
                     return;
                 }
             }
 
-            if(txt_pass.Text != txt_confirmPass.Text)
+            if(txt_pass.Text != txt_confirmPass.Text) //Make sure the password matches it's confirm.
             {
                 lbl_passCreationStatus.Content = "Passwords doesn't match!";
                 return;
             }
 
-            SaveEncPassword(EncryptPass(txt_pass.Text));
+            RegistryManager.SaveEncryptedPass(Security.EncryptPass(txt_pass.Text)); //Save the password in the registry.
 
+            //Security measures.
             lbl_passCreationStatus.Content = "Password Created/Changed, enter it now.";
-            grb_createPw.IsEnabled = false;
-            grb_enterPw.IsEnabled = true;
+            grp_createPw.IsEnabled = false;
+            grp_enterPw.IsEnabled = true;
             btn_checkIn.IsEnabled = true;
             metroAnimatedTabControl.IsEnabled = false;
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (GetEncPassword().Count() == 0)
+            if (RegistryManager.GetEncryptedPass() == null)
             {
-                grb_enterPw.IsEnabled = false;
-                grb_createPw.IsEnabled = true;
+                grp_enterPw.IsEnabled = false;
+                grp_createPw.IsEnabled = true;
                 lbl_passStatus.Content = "There's no password, create new one.";
                 return;
             }
             else
-                grb_createPw.IsEnabled = false;
+                grp_createPw.IsEnabled = false;
 
-            if (GetDecrpytedPass() == txt_enteredPass.Text)
+            if (RegistryManager.GetDecryptedPass() == txt_enteredPass.Text)
             {
                 lbl_passStatus.Content = "Logged successfully.";
                 flyout.IsOpen = false;
@@ -697,8 +646,8 @@ namespace DrNadaTreasureLand
                 MainRefreshTimer_Elapsed(null, null);
 
                 metroAnimatedTabControl.IsEnabled = true;
-                btn_checkIn.IsEnabled = false;
-                grb_createPw.IsEnabled = true;
+                grp_enterPw.IsEnabled = false;
+                grp_createPw.IsEnabled = true;
             } else
             {
                 lbl_passStatus.Content = "Wrong password.";
@@ -709,7 +658,7 @@ namespace DrNadaTreasureLand
         {
             if(await this.ShowMessageAsync("Warning", "Are you sure you want to reset the database, this will delete all existing information", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
             {
-                //TODO: Clean Database.
+                MessageBox.Show("Not implemented yet");
             }
         }
     }

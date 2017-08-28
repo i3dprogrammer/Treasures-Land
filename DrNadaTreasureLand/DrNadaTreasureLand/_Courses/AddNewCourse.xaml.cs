@@ -145,7 +145,7 @@ namespace DrNadaTreasureLand._Courses
             num_cost.Maximum = 1000000;
             num_pricePerChild.Value = 0;
             num_pricePerChild.Minimum = 0;
-            num_pricePerChild.Maximum = 1000000;
+            num_pricePerChild.Maximum = 100;
             num_level.Value = 1;
             num_level.Minimum = 1;
             num_level.Maximum = 1000000;
@@ -155,7 +155,6 @@ namespace DrNadaTreasureLand._Courses
             num_toYear.Value = 1;
             num_toYear.Minimum = 1;
             num_toYear.Maximum = 100;
-
 
             //If we are editing a course, fill the fields
             if (EditedCourse != null)

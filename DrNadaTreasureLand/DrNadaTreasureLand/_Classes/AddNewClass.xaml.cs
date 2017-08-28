@@ -39,9 +39,11 @@ namespace DrNadaTreasureLand._Classes
 
                 if (date_start.SelectedDate == null && toggle_full.IsChecked == true)
                     errorList += "Start date cannot be null while class is full!\n";
+                if (cmb_courses.SelectedIndex == -1)
+                    errorList += "You must select a Course to add new class!\n";
+                if (cmb_instructors.SelectedIndex == -1)
+                    errorList += "You must select an Instructor to add new class!\n";
 
-                //if (AllCheckBoxses.Where(x => x.IsChecked == true).Count() == 0)
-                //    errorList += "You must choose at least 1 day to continue.\n";
 
                 if (date_start.SelectedDate != null) //Check if the date in future, and the start date matches a selected day.
                 {
