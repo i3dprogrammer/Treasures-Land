@@ -29,13 +29,27 @@ namespace DrNadaTreasureLand._Classes
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            lbl_courseName.Content = Globals.Courses[c.CourseId].Name;
-            lbl_instructoName.Content = Globals.Instructors.ToList().First(x => x.Value.TeachingCourses.Contains(c)).Value.Name;
-            lbl_startDate.Content = c.StartDate;
-            lbl_over.Content = (c.Full)?"Full" : "Vacant";
-            lbl_complete.Content = (c.Over) ? "Completed" : "Incompleted";
-            txt_days.Text = c.DaysPerWeek.Aggregate((x, y) => x + ", " + y) + "\n---";
-            Globals.Children.ToList().Where(x => x.Value.RegisteredCourses.Contains(c)).ToList().ForEach(y => listView_children.Items.Add(y.Value));
+            try
+            {
+                lbl_courseName.Content = Globals.Courses[c.CourseId].Name;
+
+                if (Globals.Instructors.ToList().Exists(x => x.Value.TeachingCourses.Contains(c)))
+                    lbl_instructoName.Content = Globals.Instructors.ToList().First(x => x.Value.TeachingCourses.Contains(c)).Value.Name; //Single/First same result? ye, same time?
+                else
+                    lbl_instructoName.Content = "---";
+
+                lbl_startDate.Content = c.StartDate;
+                lbl_over.Content = (c.Full) ? "Full" : "Vacant";
+                lbl_complete.Content = (c.Over) ? "Completed" : "Incompleted";
+                if (c.DaysPerWeek != null)
+                    txt_days.Text = c.DaysPerWeek.Aggregate((x, y) => x + ", " + y) + "\n---";
+                else
+                    txt_days.Text = "---";
+                Globals.Children.ToList().Where(x => x.Value.RegisteredCourses.Contains(c)).ToList().ForEach(y => listView_children.Items.Add(y.Value));
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.StackTrace);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

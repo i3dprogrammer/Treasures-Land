@@ -74,8 +74,10 @@ namespace DrNadaTreasureLand._Courses
                     var aClass = new Objects.CheckedObject();
                     aClass.Course = c;
                     aClass.Class = c.Classes[i];
-                    if(Globals.Instructors.ToList().Exists(x => x.Value.TeachingCourses.Contains(c.Classes[i]))) //SHOULD ALWAYS EXIST
+                    if (Globals.Instructors.ToList().Exists(x => x.Value.TeachingCourses.Contains(c.Classes[i])))
                         aClass.Instructor = Globals.Instructors.ToList().Single(x => x.Value.TeachingCourses.Contains(c.Classes[i])).Value;
+                    else
+                        aClass.Instructor = new Instructor() { Name = "---" }; //hehe xd
                     listView_sections.Items.Add(aClass);
                 }
 

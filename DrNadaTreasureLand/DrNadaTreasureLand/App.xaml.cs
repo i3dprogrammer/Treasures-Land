@@ -13,5 +13,6 @@ namespace DrNadaTreasureLand
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

@@ -15,7 +15,7 @@ using MahApps.Metro.Controls.Dialogs;
 using TreasuresLand.Objects;
 using TreasuresLand.SQL;
 
-namespace DrNadaTreasureLand
+namespace DrNadaTreasureLand.Windows
 {
     /// <summary>
     /// Interaction logic for ShiftsManager.xaml

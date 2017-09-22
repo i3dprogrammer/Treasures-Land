@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TreasuresLand.Objects;
 using TreasuresLand.SQL;
+using DrNadaTreasureLand.Windows;
 
 namespace DrNadaTreasureLand
 {
@@ -28,8 +29,8 @@ namespace DrNadaTreasureLand
                 InitializeComponent();
                 this.MinHeight = this.Height;
                 this.MinWidth = this.Width;
-                flyout.IsOpen = true;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
@@ -39,17 +40,6 @@ namespace DrNadaTreasureLand
         {
             try
             {
-                //Connection.CreateDatabase();
-                //Connection.Connect();
-                //Connection.CreateTables();
-                //var str = EncryptPass("AhmedMagdy");
-                //SaveEncPassword(str);
-                //return;
-
-                if (RegistryManager.GetEncryptedPass() == null)
-                    grp_enterPw.IsEnabled = false;
-                else
-                    grp_createPw.IsEnabled = false;
 
             }
             catch (Exception ex)
@@ -89,9 +79,9 @@ namespace DrNadaTreasureLand
 
                     lbl_unpaidInstructors.Content = Globals.InstructorSalaries.Where(x => x.Value.Exists(y => y.Paid == false)).Count();
 
-                    Globals.Courses.ToList().ForEach(x => 
+                    Globals.Courses.ToList().ForEach(x =>
                     {
-                        foreach(var y in x.Value.Classes)
+                        foreach (var y in x.Value.Classes)
                         {
                             if (y.StartDate == null || y.EndDate == null || y.Over == true) //First condition is probably useless, as we have alternative checks.
                                 continue;
@@ -109,7 +99,7 @@ namespace DrNadaTreasureLand
 
                             if (DateTime.Now >= y.StartDate && y.DaysPerWeek.Contains(((DayOfWeek)DateTime.Now.DayOfWeek).ToString()))
                             {
-                                if(!y.ShiftedDates.Exists(z => z.Day == DateTime.Now.Day && z.Month == DateTime.Now.Month && z.Year == DateTime.Now.Year))
+                                if (!y.ShiftedDates.Exists(z => z.Day == DateTime.Now.Day && z.Month == DateTime.Now.Month && z.Year == DateTime.Now.Year))
                                 {
                                     var ins = Globals.Instructors.ToList().Single(z => z.Value.TeachingCourses.Contains(y)).Value;
                                     listView_todayCourses.Items.Add(new Objects.CheckedObject() { Class = y, Course = x.Value, Instructor = ins });
@@ -118,31 +108,31 @@ namespace DrNadaTreasureLand
                         }
                     });
 
-                    Globals.Instructors.ToList().ForEach(x =>
-                    {
-                        if (Globals.InstructorSalaries.ContainsKey(x.Value.Id))
-                        {
-                            foreach (var item in Globals.InstructorSalaries[x.Value.Id])
-                            {
-                                if (!Globals.Courses.ContainsKey(item.CourseId) || item.Paid == true)
-                                    continue;
+                    //Globals.Instructors.ToList().ForEach(x =>
+                    //{
+                    //    if (Globals.InstructorSalaries.ContainsKey(x.Value.Id))
+                    //    {
+                    //        foreach (var item in Globals.InstructorSalaries[x.Value.Id])
+                    //        {
+                    //            if (!Globals.Courses.ContainsKey(item.CourseId) || item.Paid == true)
+                    //                continue;
 
-                                var newSalary = new Objects.UnpaidInstructorListViewItem()
-                                {
-                                    Course = Globals.Courses[item.CourseId],
-                                    Instructor = Globals.Instructors[item.InstructorId],
-                                    Salary = item.Salary,
-                                };
+                    //            var newSalary = new Objects.UnpaidInstructorListViewItem()
+                    //            {
+                    //                Course = Globals.Courses[item.CourseId],
+                    //                Instructor = Globals.Instructors[item.InstructorId],
+                    //                Salary = item.Salary,
+                    //            };
 
-                                //if (!listView_unpaidInstructors.Items.Contains(newSalary))
-                                listView_unpaidInstructors.Items.Add(newSalary);
-                            }
+                    //            //if (!listView_unpaidInstructors.Items.Contains(newSalary))
+                    //            listView_unpaidInstructors.Items.Add(newSalary);
+                    //        }
 
-                        }
+                    //    }
 
-                        //if (!listView_instructorsHistory.Items.Contains(x.Value))
-                        listView_instructorsHistory.Items.Add(x.Value);
-                    });
+                    //    //if (!listView_instructorsHistory.Items.Contains(x.Value))
+                    //    listView_instructorsHistory.Items.Add(x.Value);
+                    //});
 
                 });
             }
@@ -153,7 +143,7 @@ namespace DrNadaTreasureLand
         }
 
         private void CoursesRefreshTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {   //TODO: TEST THIS
+        {
             bool refreshData = false;
 
             Globals.Courses.ToList().ForEach(x => //Get every course and loop through, x.Value = course
@@ -164,14 +154,15 @@ namespace DrNadaTreasureLand
                     {
                         if (!Globals.Instructors.ToList().Exists(z => z.Value.TeachingCourses.Contains(y)))
                         {   //Incase of the class having no instructor, should not happen as we MUST add the class with instructor.
-                            Classes.RemoveCourseClass(y);
-                            throw new Exception("There is no instructor assigned to " + y.Course.Name + " class, this shouldn't happen.");
+                            //Classes.RemoveCourseClass(y);
+                            //throw new Exception("There is no instructor assigned to " + y.Course.Name + " class, this shouldn't happen.");
+                            continue;
                         }
 
                         var ins = Globals.Instructors.ToList().Single(z => z.Value.TeachingCourses.Contains(y)).Value; //Get the class instructor
-                        int childCount = Globals.Children.ToList().Where(z => z.Value.RegisteredCourses.Contains(y)).Count(); //Get Children Count taking this class.
+                        int childrenCount = Globals.Children.ToList().Where(z => z.Value.RegisteredCourses.Contains(y)).Count(); //Get Children Count taking this class.
 
-                        Instructors.AddInstructorSalary(ins.Id, y.CourseId, x.Value.PricePerChild * x.Value.Cost * childCount / 100); //Add Salary
+                        Instructors.AddInstructorSalary(ins.Id, y.CourseId, x.Value.PricePerChild * x.Value.Cost * childrenCount / 100); //Add Salary
 
                         foreach (var child in Globals.Children.ToList().Where(z => z.Value.RegisteredCourses.Contains(y))) //Remove every child from the class
                         {
@@ -179,13 +170,13 @@ namespace DrNadaTreasureLand
                         }
 
                         y.Over = true; //Set over to true
-                        Classes.EditCourseClass(y); //Edit the course in the db set over to true
+                        Classes.EditCourseClass(y); //Edit the class in the db set over to true
                         refreshData = true;
                     }
                 }
             });
 
-            if(refreshData)
+            if (refreshData)
                 Globals.RefreshReferenceInformation(); //Refresh db information
 
         }
@@ -286,7 +277,8 @@ namespace DrNadaTreasureLand
                 _Courses.CourseProfile newCourse = new _Courses.CourseProfile();
                 newCourse.c = (Course)courses_listView.SelectedItem;
                 newCourse.ShowDialog();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             }
@@ -387,28 +379,40 @@ namespace DrNadaTreasureLand
                 courses_listView.Items.Clear();
                 classes_listView.Items.Clear();
 
-                Globals.Courses.ToList().ForEach(x => {
+                Globals.Courses.ToList().ForEach(x =>
+                {
                     if (x.Value.Name.ToLower().Contains(txt_filterCourses.Text.ToLower()))
                         courses_listView.Items.Add(x.Value);
 
-                    for(int i=0;i<x.Value.Classes.Count;i++)
+                    for (int i = 0; i < x.Value.Classes.Count; i++)
                     {
-                        if(x.Value.Name.ToLower().Contains(txt_filterClasses.Text.ToLower()))
-                            classes_listView.Items.Add(new Objects.CheckedObject() { Class = x.Value.Classes[i], Course = x.Value, Instructor = Globals.Instructors.ToList().First(z => z.Value.TeachingCourses.Contains(x.Value.Classes[i])).Value });
+                        if (x.Value.Name.ToLower().Contains(txt_filterClasses.Text.ToLower()))
+                        {
+                            var newClass = new Objects.CheckedObject() { Class = x.Value.Classes[i], Course = x.Value };
+                            if (Globals.Instructors.ToList().Exists(z => z.Value.TeachingCourses.Contains(x.Value.Classes[i])))
+                                newClass.Instructor = Globals.Instructors.ToList().First(z => z.Value.TeachingCourses.Contains(x.Value.Classes[i])).Value;
+                            else
+                                newClass.Instructor = new Instructor() { Name = "---" }; //hehe xd
+                            classes_listView.Items.Add(newClass);
+                        }
+
                     }
                 });
 
-                Globals.Instructors.ToList().ForEach(x => {
+                Globals.Instructors.ToList().ForEach(x =>
+                {
                     if (x.Value.Name.ToLower().Contains(txt_filterInstructors.Text.ToLower()))
                         instructors_listView.Items.Add(x.Value);
                 });
 
-                Globals.Children.ToList().ForEach(x => {
+                Globals.Children.ToList().ForEach(x =>
+                {
                     if (x.Value.Name.ToLower().Contains(txt_filterChildren.Text.ToLower()))
                         children_listView.Items.Add(x.Value);
                 });
 
-                Globals.Employees.ToList().ForEach(x => {
+                Globals.Employees.ToList().ForEach(x =>
+                {
                     if (x.Value.Name.ToLower().Contains(txt_filterEmployees.Text.ToLower()))
                         employees_listView.Items.Add(x.Value);
                 });
@@ -520,7 +524,7 @@ namespace DrNadaTreasureLand
 
         private async void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            if(classes_listView.SelectedIndex == -1)
+            if (classes_listView.SelectedIndex == -1)
             {
                 await this.ShowMessageAsync("Error!", "Select at least 1 class to show shifts manager", MessageDialogStyle.Affirmative);
                 return;
@@ -582,84 +586,21 @@ namespace DrNadaTreasureLand
             newFilter.ShowDialog();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public async void StartConnection()
         {
-            flyout.IsOpen = !flyout.IsOpen;
-        }
+            await Connection.Connect();
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if(RegistryManager.GetEncryptedPass() != null) //Checks if there's and old password
-            {
-                if (RegistryManager.GetDecryptedPass() != txt_currentPass.Text) //If there's, compare it with the new one.
-                {
-                    lbl_passCreationStatus.Content = "Current password is wrong.";
-                    return;
-                }
-            }
+            Globals.RefreshReferenceInformation();
 
-            if(txt_pass.Text != txt_confirmPass.Text) //Make sure the password matches it's confirm.
-            {
-                lbl_passCreationStatus.Content = "Passwords doesn't match!";
-                return;
-            }
+            coursesRefreshTimer = new Timer(500);
+            coursesRefreshTimer.Elapsed += CoursesRefreshTimer_Elapsed;
+            coursesRefreshTimer.Start();
 
-            RegistryManager.SaveEncryptedPass(Security.EncryptPass(txt_pass.Text)); //Save the password in the registry.
+            //mainRefreshTimer = new Timer(5000);
+            //mainRefreshTimer.Elapsed += MainRefreshTimer_Elapsed;
+            //mainRefreshTimer.Start();
 
-            //Security measures.
-            lbl_passCreationStatus.Content = "Password Created/Changed, enter it now.";
-            grp_createPw.IsEnabled = false;
-            grp_enterPw.IsEnabled = true;
-            btn_checkIn.IsEnabled = true;
-            metroAnimatedTabControl.IsEnabled = false;
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            if (RegistryManager.GetEncryptedPass() == null)
-            {
-                grp_enterPw.IsEnabled = false;
-                grp_createPw.IsEnabled = true;
-                lbl_passStatus.Content = "There's no password, create new one.";
-                return;
-            }
-            else
-                grp_createPw.IsEnabled = false;
-
-            if (RegistryManager.GetDecryptedPass() == txt_enteredPass.Text)
-            {
-                lbl_passStatus.Content = "Logged successfully.";
-                flyout.IsOpen = false;
-
-                Connection.Connect();
-
-                Globals.RefreshReferenceInformation();
-
-                coursesRefreshTimer = new Timer(500);
-                coursesRefreshTimer.Elapsed += CoursesRefreshTimer_Elapsed;
-                coursesRefreshTimer.Start();
-
-                mainRefreshTimer = new Timer(5000);
-                mainRefreshTimer.Elapsed += MainRefreshTimer_Elapsed;
-                mainRefreshTimer.Start();
-
-                MainRefreshTimer_Elapsed(null, null);
-
-                metroAnimatedTabControl.IsEnabled = true;
-                grp_enterPw.IsEnabled = false;
-                grp_createPw.IsEnabled = true;
-            } else
-            {
-                lbl_passStatus.Content = "Wrong password.";
-            }
-        }
-
-        private async void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            if(await this.ShowMessageAsync("Warning", "Are you sure you want to reset the database, this will delete all existing information", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
-            {
-                MessageBox.Show("Not implemented yet");
-            }
+            //MainRefreshTimer_Elapsed(null, null);
         }
     }
 }

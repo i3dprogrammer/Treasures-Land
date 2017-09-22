@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>treasure_icon_q6W_icon.ico</ApplicationIcon>
@@ -83,15 +84,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Filter.xaml.cs">
+    <Compile Include="Windows\SalaryHistory.xaml.cs">
+      <DependentUpon>SalaryHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Filter.xaml.cs">
       <DependentUpon>Filter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="Windows\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Objects\CheckedObject.cs" />
     <Compile Include="Objects\Filter.cs" />
     <Compile Include="Objects\PaidInstructors.cs" />
     <Compile Include="Objects\UnpaidInstructorListViewItem.cs" />
-    <Compile Include="ShiftsManager.xaml.cs">
+    <Compile Include="Windows\ShiftsManager.xaml.cs">
       <DependentUpon>ShiftsManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\RegistryManager.cs" />
@@ -126,7 +133,15 @@
     <Compile Include="_Instructors\InstructorProfile.xaml.cs">
       <DependentUpon>InstructorProfile.xaml</DependentUpon>
     </Compile>
-    <Page Include="Filter.xaml">
+    <Page Include="Windows\SalaryHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Filter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,7 +165,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ShiftsManager.xaml">
+    <Page Include="Windows\ShiftsManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +248,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="treasure_icon_q6W_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Splash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />

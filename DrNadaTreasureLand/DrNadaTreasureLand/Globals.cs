@@ -13,6 +13,7 @@ namespace DrNadaTreasureLand
     class Globals
     {
         public static MainWindow MainWindow;
+        
         public static Dictionary<int, Course> Courses = new Dictionary<int, Course>();
         public static Dictionary<int, Instructor> Instructors = new Dictionary<int, Instructor>();
         public static Dictionary<int, Child> Children = new Dictionary<int, Child>();

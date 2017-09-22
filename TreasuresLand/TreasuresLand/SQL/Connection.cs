@@ -27,7 +27,7 @@ namespace TreasuresLand.SQL
             command.ExecuteNonQuery();
         }
 
-        public static void Connect()
+        public static async Task Connect()
         {
             if (!File.Exists(".\\MainDB.sqlite"))
             { 
@@ -35,8 +35,8 @@ namespace TreasuresLand.SQL
                 CreateTables();
             }
 
-            if(conn.State == System.Data.ConnectionState.Closed)
-                conn.Open();
+            if (conn.State == System.Data.ConnectionState.Closed)
+                await conn.OpenAsync();
         }
 
         //public static void Connect(string connString = "")

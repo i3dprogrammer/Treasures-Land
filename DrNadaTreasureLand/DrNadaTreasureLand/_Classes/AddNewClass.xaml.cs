@@ -41,8 +41,8 @@ namespace DrNadaTreasureLand._Classes
                     errorList += "Start date cannot be null while class is full!\n";
                 if (cmb_courses.SelectedIndex == -1)
                     errorList += "You must select a Course to add new class!\n";
-                if (cmb_instructors.SelectedIndex == -1)
-                    errorList += "You must select an Instructor to add new class!\n";
+                //if (cmb_instructors.SelectedIndex == -1)
+                //    errorList += "You must select an Instructor to add new class!\n";
 
 
                 if (date_start.SelectedDate != null) //Check if the date in future, and the start date matches a selected day.
@@ -107,8 +107,6 @@ namespace DrNadaTreasureLand._Classes
 
                 //Remove old data, incase of editing.. if the class is new there should be no data to remove.
                 Children.RemoveChildClass(newClass.Id);
-                Instructors.RemoveInstructorClass(newClass.Id);
-
                 //For each selected children, add it to the database
                 foreach (Objects.CheckedObject item in listView_children.Items)
                 {
@@ -117,7 +115,12 @@ namespace DrNadaTreasureLand._Classes
                         Children.AddChildClass(item.Child.Id, newClass.Id);
                 }
 
-                Instructors.AddInstructorClass(((Instructor)cmb_instructors.SelectedItem).Id, newClass.Id);
+                if (cmb_instructors.SelectedIndex != -1)
+                {
+                    //Remove old data
+                    Instructors.RemoveInstructorClass(newClass.Id);
+                    Instructors.AddInstructorClass(((Instructor)cmb_instructors.SelectedItem).Id, newClass.Id);
+                }
 
                 Globals.RefreshReferenceInformation();
                 this.Close();
@@ -138,7 +141,8 @@ namespace DrNadaTreasureLand._Classes
                 try
                 {
                     cmb_courses.SelectedItem = Globals.Courses[EditedClass.CourseId];
-                    cmb_instructors.SelectedItem = Globals.Instructors.ToList().First(x => x.Value.TeachingCourses.Contains(EditedClass)).Value;
+                    if(Globals.Instructors.ToList().Exists(x => x.Value.TeachingCourses.Contains(EditedClass)))
+                        cmb_instructors.SelectedItem = Globals.Instructors.ToList().First(x => x.Value.TeachingCourses.Contains(EditedClass)).Value;
                     toggle_full.IsChecked = EditedClass.Full;
                     date_start.SelectedDate = EditedClass.StartDate;
                     time_start.SelectedTime = EditedClass.StartTime;

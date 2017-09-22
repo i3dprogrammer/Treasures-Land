@@ -12,7 +12,7 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <!--<Button Content="Configuration"/>-->
-            <Button Click="Button_Click">
+            <Button>
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
                    Height="20"
@@ -29,8 +29,187 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" Margin="-4,-3,0,0" VerticalAlignment="Stretch">
-        <Controls:MetroAnimatedTabControl x:Name="metroAnimatedTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,0,0" IsEnabled="False">
-            <TabItem Header="Main">
+        <Controls:MetroAnimatedTabControl x:Name="metroAnimatedTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,0,0">
+            <TabItem Header="Courses">
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="courses_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="courses_listView_MouseDoubleClick" SelectionChanged="courses_listView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}"/>
+                                <GridViewColumn Header="Total Sessions" DisplayMemberBinding="{Binding TotalSessions}"/>
+                                <GridViewColumn Header="Session Duration" DisplayMemberBinding="{Binding SessionDuration}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label x:Name="label1" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="90"/>
+                    <TextBox x:Name="txt_filterCourses" HorizontalAlignment="Left" Height="11" Margin="105,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="txt_filterCourses_TextChanged" Width="244"/>
+                    <Button x:Name="button2" Content="New Course" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="128" Click="button2_Click" FontSize="17"></Button>
+                    <Button x:Name="button1_Copy2" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,133,0" VerticalAlignment="Top" Width="128" Click="button1_Copy2_Click_1" FontSize="17"></Button>
+                    <Button x:Name="button1_Copy3" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,407,0" VerticalAlignment="Top" Width="139" Click="button1_Copy3_Click" FontSize="17" Visibility="Hidden"></Button>
+                    <Label x:Name="label_Copy1" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,538,0" VerticalAlignment="Top" Width="99"/>
+                    <Button x:Name="button1_Copy8" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,266,0" VerticalAlignment="Top" Width="136" Click="button1_Copy2_Click" FontSize="17"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Instructors">
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="instructors_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="instructors_listView_MouseDoubleClick">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=Address}"/>
+                                <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Path=Phone}"/>
+                                <GridViewColumn Header="Qualification" DisplayMemberBinding="{Binding Path=Qualifier}"/>
+                                <!--<GridViewColumn Header="Courses" Width="300">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding TeachingCourses}" Width="300" Margin="-6,0,-6,0" DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>-->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label x:Name="label2" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,11,0,0" VerticalAlignment="Top" Width="84"/>
+                    <TextBox x:Name="txt_filterInstructors" HorizontalAlignment="Left" Height="11" Margin="99,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="241" TextChanged="txt_filterInstructors_TextChanged"/>
+                    <Button x:Name="button3" Content="New Instructor" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="134" Click="button3_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy4" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy4_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy5" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,411,0" VerticalAlignment="Top" Width="139" Click="button1_Copy5_Click" FontSize="17" Visibility="Hidden"/>
+                    <Label x:Name="label_Copy2" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,10,554,0" VerticalAlignment="Top" Width="92"/>
+                    <Button x:Name="button1_Copy9" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,270,0" VerticalAlignment="Top" Width="137" Click="button1_Copy9_Click" FontSize="17"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Children">
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="children_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="children_listView_MouseDoubleClick" SelectionChanged="children_listView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Path=Age}"/>
+                                <GridViewColumn Header="Guardian Name" DisplayMemberBinding="{Binding Path=GuardianName}"/>
+                                <GridViewColumn Header="WhatsApp Number" DisplayMemberBinding="{Binding Path=WhatsAppPhone}"/>
+                                <!--<GridViewColumn Header="Courses" Width="300">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding RegisteredCourses}" Width="300" Margin="-6,0,-6,0" DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>-->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label x:Name="label" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="88"/>
+                    <TextBox x:Name="txt_filterChildren" HorizontalAlignment="Left" Height="11" Margin="103,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" TextChanged="txt_filterName_TextChanged"/>
+                    <Button x:Name="button1" Content="New Child" HorizontalAlignment="Right" Height="34" Margin="646,7,0,0" VerticalAlignment="Top" Width="128" Click="button1_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,133,0" VerticalAlignment="Top" Width="128" Click="button1_Copy_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy1" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,408,0" VerticalAlignment="Top" Width="139" Click="button1_Copy1_Click" FontSize="17" Visibility="Hidden"/>
+                    <Label x:Name="label_Copy" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="104"/>
+                    <Button x:Name="button1_Copy10" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,266,0" VerticalAlignment="Top" Width="137" Click="button1_Copy10_Click" FontSize="17"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Employees">
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="employees_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="employees_listView_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}"/>
+                                <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
+                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
+                                <GridViewColumn Header="National Id" DisplayMemberBinding="{Binding NationalId}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label x:Name="label3" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
+                    <TextBox x:Name="txt_filterEmployees" HorizontalAlignment="Left" Height="11" Margin="99,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242" TextChanged="txt_filterEmployees_TextChanged"/>
+                    <Button x:Name="button4" Content="New Employee" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="133" Click="button4_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy6" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy6_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy7" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,412,0" VerticalAlignment="Top" Width="139" Click="button1_Copy7_Click" FontSize="17" Visibility="Hidden"/>
+                    <Label x:Name="label_Copy3" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="102"/>
+                    <Button x:Name="button1_Copy11" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,271,0" VerticalAlignment="Top" Width="136" Click="button1_Copy11_Click" FontSize="17"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Classes">
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="classes_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="classes_listView_MouseDoubleClick">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Show Shifts Manager" Click="MenuItem_Click_2"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Class.Id}"/>
+                                <GridViewColumn Header="Course" DisplayMemberBinding="{Binding Course.Name}"/>
+                                <GridViewColumn Header="Class" DisplayMemberBinding="{Binding Class.Number}"/>
+                                <GridViewColumn Header="Instructor Name" DisplayMemberBinding="{Binding Instructor.Name}"/>
+                                <GridViewColumn Header="Full" DisplayMemberBinding="{Binding Class.Full}"/>
+                                <GridViewColumn Header="Finished" DisplayMemberBinding="{Binding Class.Over}"/>
+                                <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Class.StartDate, StringFormat=d}"/>
+                                <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Class.EndDate, StringFormat=d}"/>
+                                <GridViewColumn Header="Sessions Left" DisplayMemberBinding="{Binding Class.SessionsLeft}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label x:Name="label4" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
+                    <TextBox x:Name="txt_filterClasses" HorizontalAlignment="Left" Height="11" Margin="99,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242" TextChanged="txt_filterEmployees_TextChanged"/>
+                    <Button x:Name="button5" Content="New Class" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="133" Click="button5_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy12" Content="Edit Class" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy12_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy13" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,412,0" VerticalAlignment="Top" Width="139" Click="button1_Copy14_Click_1" FontSize="17" Visibility="Hidden"/>
+                    <Label x:Name="label_Copy4" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="102"/>
+                    <Button x:Name="button1_Copy14" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,271,0" VerticalAlignment="Top" Width="136" Click="button1_Copy14_Click" FontSize="17"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Salaries" Visibility="Hidden">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Header="Unpaid Instructors" HorizontalAlignment="Stretch" Height="308" Margin="0" VerticalAlignment="Top">
+                        <Grid>
+                            <ListView x:Name="listView_unpaidInstructors" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,40">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Instructor.Name}"/>
+                                        <GridViewColumn Header="Age" Width="120" DisplayMemberBinding="{Binding Instructor.Age}"/>
+                                        <GridViewColumn Header="Phone" Width="120" DisplayMemberBinding="{Binding Instructor.Phone}"/>
+                                        <GridViewColumn Header="Course Name" Width="120" DisplayMemberBinding="{Binding Course.Name}"/>
+                                        <GridViewColumn Header="Salary" Width="120" DisplayMemberBinding="{Binding Salary}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Button Content="Pay Selected Instructor" HorizontalAlignment="Stretch" Margin="0,234,0,0" VerticalAlignment="Top" Height="35" Click="Button_Click_2" FontSize="17"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Salary History" HorizontalAlignment="Stretch" Margin="0,313,0,5" VerticalAlignment="Stretch">
+                        <Grid>
+                            <ListView x:Name="listView_instructorsHistory" HorizontalAlignment="Left" Margin="0,34,0,0" Width="454" SelectionChanged="listView_instructorsHistory_SelectionChanged">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Instructor" Width="130" DisplayMemberBinding="{Binding Name}"/>
+                                        <GridViewColumn Header="Age" Width="130" DisplayMemberBinding="{Binding Age}"/>
+                                        <GridViewColumn Header="Phone" Width="130" DisplayMemberBinding="{Binding Phone}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Label Content="Select Instructor to see previous salaries" HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <ListView x:Name="listView_salaryHistory" Margin="459,34,0,0">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Course Id" Width="130" DisplayMemberBinding="{Binding CourseId}"/>
+                                        <!--<GridViewColumn Header="Course Name" Width="130" DisplayMemberBinding="{Binding Name}"/>-->
+                                        <GridViewColumn Header="Salary" Width="130" DisplayMemberBinding="{Binding Salary}"/>
+                                        <GridViewColumn Header="Paid" Width="130" DisplayMemberBinding="{Binding Paid}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Label Content="Previous Salaries" HorizontalAlignment="Left" Margin="459,-1,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Main" Visibility="Hidden">
                 <Grid Background="#FFE5E5E5">
                     <GroupBox Header="Statistics" HorizontalAlignment="Left" Margin="0,392,0,0" VerticalAlignment="Stretch" Width="500">
                         <Grid>
@@ -81,213 +260,8 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Courses">
-                <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="courses_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="courses_listView_MouseDoubleClick" SelectionChanged="courses_listView_SelectionChanged">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                                <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}"/>
-                                <GridViewColumn Header="Total Sessions" DisplayMemberBinding="{Binding TotalSessions}"/>
-                                <GridViewColumn Header="Session Duration" DisplayMemberBinding="{Binding SessionDuration}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Label x:Name="label1" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="90"/>
-                    <TextBox x:Name="txt_filterCourses" HorizontalAlignment="Left" Height="11" Margin="105,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="txt_filterCourses_TextChanged" Width="244"/>
-                    <Button x:Name="button2" Content="New Course" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="128" Click="button2_Click" FontSize="17"></Button>
-                    <Button x:Name="button1_Copy2" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,133,0" VerticalAlignment="Top" Width="128" Click="button1_Copy2_Click_1" FontSize="17"></Button>
-                    <Button x:Name="button1_Copy3" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,407,0" VerticalAlignment="Top" Width="139" Click="button1_Copy3_Click" FontSize="17"></Button>
-                    <Label x:Name="label_Copy1" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,538,0" VerticalAlignment="Top" Width="99"/>
-                    <Button x:Name="button1_Copy8" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,266,0" VerticalAlignment="Top" Width="136" Click="button1_Copy2_Click" FontSize="17"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Instructors">
-                <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="instructors_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="instructors_listView_MouseDoubleClick">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
-                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=Address}"/>
-                                <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Path=Phone}"/>
-                                <GridViewColumn Header="Qualification" DisplayMemberBinding="{Binding Path=Qualifier}"/>
-                                <!--<GridViewColumn Header="Courses" Width="300">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding TeachingCourses}" Width="300" Margin="-6,0,-6,0" DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>-->
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Label x:Name="label2" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,11,0,0" VerticalAlignment="Top" Width="84"/>
-                    <TextBox x:Name="txt_filterInstructors" HorizontalAlignment="Left" Height="11" Margin="99,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="241" TextChanged="txt_filterInstructors_TextChanged"/>
-                    <Button x:Name="button3" Content="New Instructor" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="134" Click="button3_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy4" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy4_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy5" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,411,0" VerticalAlignment="Top" Width="139" Click="button1_Copy5_Click" FontSize="17"/>
-                    <Label x:Name="label_Copy2" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,10,554,0" VerticalAlignment="Top" Width="92"/>
-                    <Button x:Name="button1_Copy9" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,270,0" VerticalAlignment="Top" Width="137" Click="button1_Copy9_Click" FontSize="17"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Children">
-                <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="children_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="children_listView_MouseDoubleClick" SelectionChanged="children_listView_SelectionChanged">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
-                                <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Path=Age}"/>
-                                <GridViewColumn Header="Guardian Name" DisplayMemberBinding="{Binding Path=GuardianName}"/>
-                                <GridViewColumn Header="WhatsApp Number" DisplayMemberBinding="{Binding Path=WhatsAppPhone}"/>
-                                <!--<GridViewColumn Header="Courses" Width="300">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding RegisteredCourses}" Width="300" Margin="-6,0,-6,0" DisplayMemberPath="Name" IsSynchronizedWithCurrentItem="True"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>-->
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Label x:Name="label" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="88"/>
-                    <TextBox x:Name="txt_filterChildren" HorizontalAlignment="Left" Height="11" Margin="103,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" TextChanged="txt_filterName_TextChanged"/>
-                    <Button x:Name="button1" Content="New Child" HorizontalAlignment="Right" Height="34" Margin="646,7,0,0" VerticalAlignment="Top" Width="128" Click="button1_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,133,0" VerticalAlignment="Top" Width="128" Click="button1_Copy_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy1" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,408,0" VerticalAlignment="Top" Width="139" Click="button1_Copy1_Click" FontSize="17"/>
-                    <Label x:Name="label_Copy" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="104"/>
-                    <Button x:Name="button1_Copy10" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,266,0" VerticalAlignment="Top" Width="137" Click="button1_Copy10_Click" FontSize="17"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Employees">
-                <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="employees_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="employees_listView_SelectionChanged">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                                <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}"/>
-                                <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
-                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
-                                <GridViewColumn Header="National Id" DisplayMemberBinding="{Binding NationalId}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Label x:Name="label3" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
-                    <TextBox x:Name="txt_filterEmployees" HorizontalAlignment="Left" Height="11" Margin="99,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242" TextChanged="txt_filterEmployees_TextChanged"/>
-                    <Button x:Name="button4" Content="New Employee" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="133" Click="button4_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy6" Content="Edit Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy6_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy7" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,412,0" VerticalAlignment="Top" Width="139" Click="button1_Copy7_Click" FontSize="17"/>
-                    <Label x:Name="label_Copy3" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="102"/>
-                    <Button x:Name="button1_Copy11" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,271,0" VerticalAlignment="Top" Width="136" Click="button1_Copy11_Click" FontSize="17"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Classes">
-                <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="classes_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="classes_listView_MouseDoubleClick">
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Show Shifts Manager" Click="MenuItem_Click_2"/>
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Class.Id}"/>
-                                <GridViewColumn Header="Course" DisplayMemberBinding="{Binding Course.Name}"/>
-                                <GridViewColumn Header="Class" DisplayMemberBinding="{Binding Class.Number}"/>
-                                <GridViewColumn Header="Instructor Name" DisplayMemberBinding="{Binding Instructor.Name}"/>
-                                <GridViewColumn Header="Full" DisplayMemberBinding="{Binding Class.Full}"/>
-                                <GridViewColumn Header="Finished" DisplayMemberBinding="{Binding Class.Over}"/>
-                                <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Class.StartDate, StringFormat=d}"/>
-                                <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Class.EndDate, StringFormat=d}"/>
-                                <GridViewColumn Header="Sessions Left" DisplayMemberBinding="{Binding Class.SessionsLeft}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Label x:Name="label4" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
-                    <TextBox x:Name="txt_filterClasses" HorizontalAlignment="Left" Height="11" Margin="99,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242" TextChanged="txt_filterEmployees_TextChanged"/>
-                    <Button x:Name="button5" Content="New Class" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="133" Click="button5_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy12" Content="Edit Class" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy12_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy13" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,412,0" VerticalAlignment="Top" Width="139" Click="button1_Copy14_Click_1" FontSize="17"/>
-                    <Label x:Name="label_Copy4" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="102"/>
-                    <Button x:Name="button1_Copy14" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,271,0" VerticalAlignment="Top" Width="136" Click="button1_Copy14_Click" FontSize="17"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Salaries">
-                <Grid Background="#FFE5E5E5">
-                    <GroupBox Header="Unpaid Instructors" HorizontalAlignment="Stretch" Height="308" Margin="0" VerticalAlignment="Top">
-                        <Grid>
-                            <ListView x:Name="listView_unpaidInstructors" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,40">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Instructor.Name}"/>
-                                        <GridViewColumn Header="Age" Width="120" DisplayMemberBinding="{Binding Instructor.Age}"/>
-                                        <GridViewColumn Header="Phone" Width="120" DisplayMemberBinding="{Binding Instructor.Phone}"/>
-                                        <GridViewColumn Header="Course Name" Width="120" DisplayMemberBinding="{Binding Course.Name}"/>
-                                        <GridViewColumn Header="Salary" Width="120" DisplayMemberBinding="{Binding Salary}"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                            <Button Content="Pay Selected Instructor" HorizontalAlignment="Stretch" Margin="0,234,0,0" VerticalAlignment="Top" Height="35" Click="Button_Click_2" FontSize="17"/>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Salary History" HorizontalAlignment="Stretch" Margin="0,313,0,5" VerticalAlignment="Stretch">
-                        <Grid>
-                            <ListView x:Name="listView_instructorsHistory" HorizontalAlignment="Left" Margin="0,34,0,0" Width="454" SelectionChanged="listView_instructorsHistory_SelectionChanged">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Instructor" Width="130" DisplayMemberBinding="{Binding Name}"/>
-                                        <GridViewColumn Header="Age" Width="130" DisplayMemberBinding="{Binding Age}"/>
-                                        <GridViewColumn Header="Phone" Width="130" DisplayMemberBinding="{Binding Phone}"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                            <Label Content="Select Instructor to see previous salaries" HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <ListView x:Name="listView_salaryHistory" Margin="459,34,0,0">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Course Id" Width="130" DisplayMemberBinding="{Binding CourseId}"/>
-                                        <!--<GridViewColumn Header="Course Name" Width="130" DisplayMemberBinding="{Binding Name}"/>-->
-                                        <GridViewColumn Header="Salary" Width="130" DisplayMemberBinding="{Binding Salary}"/>
-                                        <GridViewColumn Header="Paid" Width="130" DisplayMemberBinding="{Binding Paid}"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                            <Label Content="Previous Salaries" HorizontalAlignment="Left" Margin="459,-1,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                        </Grid>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
 
         </Controls:MetroAnimatedTabControl>
-        <Controls:Flyout x:Name="flyout" Header="Settings" Position="Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:MetroWindow}, Path=ActualWidth}">
-            <Grid>
-                <GroupBox x:Name="grp_createPw" Header="Password Creation" HorizontalAlignment="Stretch" Height="180" Margin="10,0,0,0" VerticalAlignment="Top">
-                    <Grid>
-                        <Label Content="Password: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,308,0"/>
-                        <TextBox x:Name="txt_pass" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Margin="167,4,0,0"/>
-                        <Button Content="Create / Change" HorizontalAlignment="Right" VerticalAlignment="Top" Width="385" FontSize="18" Height="39" Margin="572,98,0,0" Click="Button_Click_1"/>
-                        <Label Content="Confirm Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,32,0,0"/>
-                        <TextBox x:Name="txt_confirmPass" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Margin="167,36,0,0"/>
-                        <Label Content="Current Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,63,0,0"/>
-                        <TextBox x:Name="txt_currentPass" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="20" Margin="167,67,311,0"/>
-                        <Label Content="Leave current password blank if there's none." HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,63,-2,0"/>
-                        <Label x:Name="lbl_passCreationStatus" Content="...." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="167,107,0,0" FontWeight="Bold" Width="408"/>
-                    </Grid>
-                </GroupBox>
-                <GroupBox x:Name="grp_enterPw" Header="Password Entry" HorizontalAlignment="Stretch" Height="180" Margin="10,185,0,0" VerticalAlignment="Top">
-                    <Grid>
-                        <Label Content="Password: " HorizontalAlignment="Center" VerticalAlignment="Center" Margin="308,17,569,94"/>
-                        <TextBox x:Name="txt_enteredPass" HorizontalAlignment="Center" VerticalAlignment="Center" Width="254" Height="20" Margin="386,19,317,96"/>
-                        <Button x:Name="btn_checkIn" Content="Check In" HorizontalAlignment="Center" VerticalAlignment="Top" Width="332" FontSize="18" Height="39" Margin="308,80,317,0" Click="Button_Click_3"/>
-                        <Label x:Name="lbl_passStatus" Content="...." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="310,50,318,61" FontWeight="Bold" Width="332"/>
-                    </Grid>
-                </GroupBox>
-                <Button Content="Reset Database" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18" FontWeight="Bold" Margin="10,370,10,10" Click="Button_Click_4"/>
-            </Grid>
-        </Controls:Flyout>
     </Grid>
 
     <!-- your content -->
