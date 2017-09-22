@@ -9,12 +9,13 @@
                       BorderThickness="2"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Height="287.001"
-                      Width="369.333" FontSize="15">
+                      Width="507.333" FontSize="15" Loaded="MetroWindow_Loaded">
     <Grid>
-        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ListView x:Name="lstView_main" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Instructor Name" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Instructor Name" Width="168" DisplayMemberBinding="{Binding Instructor.Name}"/>
+                    <GridViewColumn Header="Course Name" Width="168" DisplayMemberBinding="{Binding Course.Name}"/>
                     <GridViewColumn Header="Salary" Width="80" DisplayMemberBinding="{Binding Salary}"/>
                     <GridViewColumn Header="Paid" Width="80" DisplayMemberBinding="{Binding Paid}"/>
                 </GridView>

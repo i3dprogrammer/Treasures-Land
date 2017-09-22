@@ -508,18 +508,18 @@ namespace DrNadaTreasureLand
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (listView_unpaidInstructors.SelectedIndex == -1)
-                return;
+            //if (listView_unpaidInstructors.SelectedIndex == -1)
+            //    return;
 
-            foreach (Objects.UnpaidInstructorListViewItem item in listView_unpaidInstructors.SelectedItems)
-            {
-                if (await this.ShowMessageAsync("Payment", "You're going to pay " + item.Salary + " to " + Globals.Instructors[item.Instructor.Id].Name, MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
-                {
-                    Instructors.PayInstructorSalary(item.Instructor.Id, item.Course.Id);
-                }
-            }
+            //foreach (Objects.UnpaidInstructorListViewItem item in listView_unpaidInstructors.SelectedItems)
+            //{
+            //    if (await this.ShowMessageAsync("Payment", "You're going to pay " + item.Salary + " to " + Globals.Instructors[item.Instructor.Id].Name, MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
+            //    {
+            //        Instructors.PayInstructorSalary(item.Instructor.Id, item.Course.Id);
+            //    }
+            //}
 
-            Globals.RefreshReferenceInformation();
+            //Globals.RefreshReferenceInformation();
         }
 
         private async void MenuItem_Click_2(object sender, RoutedEventArgs e)
@@ -601,6 +601,33 @@ namespace DrNadaTreasureLand
             //mainRefreshTimer.Start();
 
             //MainRefreshTimer_Elapsed(null, null);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void menu_salaryHistory_Click(object sender, RoutedEventArgs e)
+        {
+            if (instructors_listView.SelectedIndex == -1 || instructors_listView.SelectedItems.Count > 1)
+            {
+                await this.ShowMessageAsync("Error", "Please make sure to select one instructor!");
+                return;
+            }
+
+            var ins = (Instructor)instructors_listView.SelectedItem;
+
+            if (Globals.InstructorSalaries[ins.Id].Count == 0)
+            {
+                await this.ShowMessageAsync("Warning", "There's no salary history for this instructor.");
+                return;
+            }
+
+            SalaryHistory win = new SalaryHistory();
+            win.c = ins;
+            win.ShowDialog();
+
         }
     }
 }

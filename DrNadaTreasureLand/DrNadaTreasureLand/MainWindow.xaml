@@ -9,9 +9,9 @@
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Height="730.308"
                       Width="1007.436" Loaded="MetroWindow_Loaded" FontSize="15">
-    <Controls:MetroWindow.RightWindowCommands>
+    <!--<Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <!--<Button Content="Configuration"/>-->
+            --><!--<Button Content="Configuration"/>--><!--
             <Button>
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
@@ -27,7 +27,7 @@
                 </StackPanel>
             </Button>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>-->
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" Margin="-4,-3,0,0" VerticalAlignment="Stretch">
         <Controls:MetroAnimatedTabControl x:Name="metroAnimatedTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,0,0">
             <TabItem Header="Courses">
@@ -55,6 +55,11 @@
             <TabItem Header="Instructors">
                 <Grid Background="#FFE5E5E5">
                     <ListView x:Name="instructors_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="instructors_listView_MouseDoubleClick">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="menu_salaryHistory" Header="Check Salary History" Click="menu_salaryHistory_Click"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -135,7 +140,11 @@
             </TabItem>
             <TabItem Header="Classes">
                 <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="classes_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="classes_listView_MouseDoubleClick">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="67*"/>
+                        <ColumnDefinition Width="922*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="classes_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="classes_listView_MouseDoubleClick" Grid.ColumnSpan="2">
                         <ListView.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Show Shifts Manager" Click="MenuItem_Click_2"/>
@@ -155,13 +164,13 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Label x:Name="label4" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="84"/>
-                    <TextBox x:Name="txt_filterClasses" HorizontalAlignment="Left" Height="11" Margin="99,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242" TextChanged="txt_filterEmployees_TextChanged"/>
-                    <Button x:Name="button5" Content="New Class" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="133" Click="button5_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy12" Content="Edit Class" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy12_Click" FontSize="17"/>
-                    <Button x:Name="button1_Copy13" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,412,0" VerticalAlignment="Top" Width="139" Click="button1_Copy14_Click_1" FontSize="17" Visibility="Hidden"/>
-                    <Label x:Name="label_Copy4" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="102"/>
-                    <Button x:Name="button1_Copy14" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,271,0" VerticalAlignment="Top" Width="136" Click="button1_Copy14_Click" FontSize="17"/>
+                    <Label x:Name="label4" Content="Filter name" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="txt_filterClasses" HorizontalAlignment="Left" Height="11" Margin="32,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242" TextChanged="txt_filterEmployees_TextChanged" Grid.Column="1"/>
+                    <Button x:Name="button5" Content="New Class" HorizontalAlignment="Right" Height="34" Margin="0,7,0,0" VerticalAlignment="Top" Width="133" Click="button5_Click" FontSize="17" Grid.Column="1"/>
+                    <Button x:Name="button1_Copy12" Content="Edit Class" HorizontalAlignment="Right" Height="34" Margin="0,7,138,0" VerticalAlignment="Top" Width="128" Click="button1_Copy12_Click" FontSize="17" Grid.Column="1"/>
+                    <Button x:Name="button1_Copy13" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,412,0" VerticalAlignment="Top" Width="139" Click="button1_Copy14_Click_1" FontSize="17" Visibility="Hidden" Grid.Column="1"/>
+                    <Label x:Name="label_Copy4" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,9,543,0" VerticalAlignment="Top" Width="102" Grid.Column="1"/>
+                    <Button x:Name="button1_Copy14" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,271,0" VerticalAlignment="Top" Width="136" Click="button1_Copy14_Click" FontSize="17" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Salaries" Visibility="Hidden">

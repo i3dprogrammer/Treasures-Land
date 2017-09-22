@@ -96,8 +96,7 @@
     </Compile>
     <Compile Include="Objects\CheckedObject.cs" />
     <Compile Include="Objects\Filter.cs" />
-    <Compile Include="Objects\PaidInstructors.cs" />
-    <Compile Include="Objects\UnpaidInstructorListViewItem.cs" />
+    <Compile Include="Objects\InstructorSalaryListViewItem.cs" />
     <Compile Include="Windows\ShiftsManager.xaml.cs">
       <DependentUpon>ShiftsManager.xaml</DependentUpon>
     </Compile>
