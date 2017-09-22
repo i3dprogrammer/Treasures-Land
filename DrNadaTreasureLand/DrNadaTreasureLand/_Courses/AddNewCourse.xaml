@@ -17,7 +17,7 @@
                 <Label Content="Course Name" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="100" Margin="0,-3,0,0"/>
                 <Controls:NumericUpDown x:Name="num_cost" HorizontalAlignment="Left" Height="6" Margin="105,31,0,0" VerticalAlignment="Top" Width="118"/>
                 <Label Content="Cost" HorizontalAlignment="Left" Height="28" Margin="1,29,0,0" VerticalAlignment="Top" Width="81"/>
-                <GroupBox Header="Targeted Age" Height="68" Margin="0,109,0,0" VerticalAlignment="Top">
+                <GroupBox Header="Targeted Age" Height="68" Margin="0,107,0,0" VerticalAlignment="Top">
                     <Grid>
                         <Label Content="From" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-1,0,0"/>
                         <Label Content="To" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="184,-1,0,0"/>
@@ -26,7 +26,7 @@
 
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="Sessions" Height="105" Margin="0,194,0,0" VerticalAlignment="Top">
+                <GroupBox Header="Sessions" Height="105" Margin="0,192,0,0" VerticalAlignment="Top">
                     <Grid>
                         <Label Content="Total Sessions Count" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36,0,0"/>
                         <Controls:NumericUpDown x:Name="num_totalSessionsCount" HorizontalAlignment="Left" Margin="154,37,0,0" VerticalAlignment="Top" Width="234"/>
