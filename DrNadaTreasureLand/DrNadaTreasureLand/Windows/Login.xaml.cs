@@ -29,6 +29,7 @@ namespace DrNadaTreasureLand.Windows
         private const int loginMarginTop = 180;
         public Login()
         {
+            
             InitializeComponent();
         }
 

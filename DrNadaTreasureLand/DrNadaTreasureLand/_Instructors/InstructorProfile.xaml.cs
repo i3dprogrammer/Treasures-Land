@@ -30,26 +30,33 @@ namespace DrNadaTreasureLand._Instructors
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Title = "Instructor " + c.Name + " Profile";
-            lbl_name.Content = c.Name;
-            lbl_age.Content = c.Age + " Years Old";
-            lbl_gender.Content = (c.Gender == 0) ? "Male" : "Female";
-            lbl_phone.Content = c.Phone;
-            lbl_qualifier.Content = c.Qualifier;
-            lbl_address.Content = c.Address;
-
-            for(int i = 0; i < c.TeachingCourses.Count; i++)
+            try
             {
-                var x = c.TeachingCourses[i];
+                this.Title = "Instructor " + c.Name + " Profile";
+                lbl_name.Content = c.Name;
+                lbl_age.Content = c.Age + " Years Old";
+                lbl_gender.Content = (c.Gender == 0) ? "Male" : "Female";
+                lbl_phone.Content = c.Phone;
+                lbl_qualifier.Content = c.Qualifier;
+                lbl_address.Content = c.Address;
 
-                if (x.Over)
-                    continue;
-
-                courses_listView.Items.Add(new Objects.CheckedObject()
+                for (int i = 0; i < c.TeachingCourses.Count; i++)
                 {
-                    Class = x,
-                    Course = Globals.Courses.First(y => y.Value.Classes.Contains(x)).Value,
-                });
+                    var x = c.TeachingCourses[i];
+                    Console.WriteLine(c.TeachingCourses.Count);
+                    if (x.Over)
+                        continue;
+
+                    courses_listView.Items.Add(new Objects.CheckedObject()
+                    {
+                        Class = x,
+                        Course = Globals.Courses.First(y => y.Value.Classes.Contains(x)).Value,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.StackTrace);
             }
         }
 
@@ -59,7 +66,8 @@ namespace DrNadaTreasureLand._Instructors
             {
                 System.IO.File.WriteAllBytes(System.IO.Directory.GetCurrentDirectory() + "\\tempCV.pdf", c.CV);
                 System.Diagnostics.Process.Start(System.IO.Directory.GetCurrentDirectory() + "\\tempCV.pdf");
-            } else
+            }
+            else
             {
                 await this.ShowMessageAsync("Error", "This instructor has no CV file.");
             }

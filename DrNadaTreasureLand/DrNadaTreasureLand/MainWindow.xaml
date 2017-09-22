@@ -8,10 +8,12 @@
                       BorderThickness="2"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Height="730.308"
-                      Width="1007.436" Loaded="MetroWindow_Loaded" FontSize="15">
+                      Width="1007.436" FontSize="15">
     <!--<Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            --><!--<Button Content="Configuration"/>--><!--
+            -->
+    <!--<Button Content="Configuration"/>-->
+    <!--
             <Button>
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20"
@@ -54,14 +56,22 @@
             </TabItem>
             <TabItem Header="Instructors">
                 <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="instructors_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="instructors_listView_MouseDoubleClick">
-                        <ListView.ContextMenu>
+                    <ListView x:Name="instructors_listView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0" MouseDoubleClick="instructors_listView_MouseDoubleClick" SelectionChanged="instructors_listView_SelectionChanged">
+                        <!--<ListView.ContextMenu>
                             <ContextMenu>
                                 <MenuItem x:Name="menu_salaryHistory" Header="Check Salary History" Click="menu_salaryHistory_Click"/>
                             </ContextMenu>
-                        </ListView.ContextMenu>
+                        </ListView.ContextMenu>-->
                         <ListView.View>
                             <GridView>
+                                <GridViewColumn Header="Paid">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsEnabled="False" IsChecked="{Binding SalaryPaid}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
                                 <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=Address}"/>
@@ -84,6 +94,7 @@
                     <Button x:Name="button1_Copy5" Content="New Filter" HorizontalAlignment="Right" Height="34" Margin="0,7,411,0" VerticalAlignment="Top" Width="139" Click="button1_Copy5_Click" FontSize="17" Visibility="Hidden"/>
                     <Label x:Name="label_Copy2" Content="Shown: All" HorizontalAlignment="Right" Height="28" Margin="0,10,554,0" VerticalAlignment="Top" Width="92"/>
                     <Button x:Name="button1_Copy9" Content="Delete Selected" HorizontalAlignment="Right" Height="34" Margin="0,7,270,0" VerticalAlignment="Top" Width="137" Click="button1_Copy9_Click" FontSize="17"/>
+                    <Button x:Name="button1_Copy15" Content="Salary Manager" HorizontalAlignment="Right" Height="34" Margin="0,7,411,0" VerticalAlignment="Top" Width="137" Click="menu_salaryHistory_Click" FontSize="17"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Children">

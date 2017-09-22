@@ -11,6 +11,7 @@ using System.Windows.Input;
 using TreasuresLand.Objects;
 using TreasuresLand.SQL;
 using DrNadaTreasureLand.Windows;
+using System.Windows.Media;
 
 namespace DrNadaTreasureLand
 {
@@ -29,18 +30,6 @@ namespace DrNadaTreasureLand
                 InitializeComponent();
                 this.MinHeight = this.Height;
                 this.MinWidth = this.Width;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + ex.StackTrace);
-            }
-        }
-
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-
             }
             catch (Exception ex)
             {
@@ -307,7 +296,7 @@ namespace DrNadaTreasureLand
                 return;
 
             _Instructors.AddNewInstructor nc = new _Instructors.AddNewInstructor();
-            nc.EditedInstructor = (Instructor)instructors_listView.SelectedItem;
+            nc.EditedInstructor = (Instructor)((ListViewItem)instructors_listView.SelectedItem).Content;
             nc.ShowDialog();
         }
 
@@ -325,7 +314,7 @@ namespace DrNadaTreasureLand
                 return;
 
             _Instructors.InstructorProfile pf = new _Instructors.InstructorProfile();
-            pf.c = (Instructor)instructors_listView.SelectedItem;
+            pf.c = (Instructor)((ListViewItem)instructors_listView.SelectedItem).Content;
             pf.ShowDialog();
         }
 
@@ -402,7 +391,22 @@ namespace DrNadaTreasureLand
                 Globals.Instructors.ToList().ForEach(x =>
                 {
                     if (x.Value.Name.ToLower().Contains(txt_filterInstructors.Text.ToLower()))
-                        instructors_listView.Items.Add(x.Value);
+                    {
+                        if (Globals.InstructorSalaries.ContainsKey(x.Key))
+                        {
+                            ListViewItem item = new ListViewItem();
+                            item.Content = x.Value;
+
+                            if (Globals.InstructorSalaries[x.Key].Exists(y => y.Paid == false))
+                            {
+                                item.Background = Brushes.LightGray;
+                                x.Value.SalaryPaid = false;
+                            }
+
+                            instructors_listView.Items.Add(item);
+                        }
+                        else throw new Exception("There cannot exist an instructor without a salary histroy record.");
+                    }
                 });
 
                 Globals.Children.ToList().ForEach(x =>
@@ -451,9 +455,9 @@ namespace DrNadaTreasureLand
 
             if (await this.ShowMessageAsync("Deleting", "You are going to delete " + instructors_listView.SelectedItems.Count + " Instructors are you sure?", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
             {
-                foreach (Instructor item in instructors_listView.SelectedItems)
+                foreach (ListViewItem item in instructors_listView.SelectedItems)
                 {
-                    Instructors.RemoveInstructor(item);
+                    Instructors.RemoveInstructor((Instructor)item.Content);
                 }
                 Globals.RefreshReferenceInformation();
             }
@@ -603,11 +607,6 @@ namespace DrNadaTreasureLand
             //MainRefreshTimer_Elapsed(null, null);
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private async void menu_salaryHistory_Click(object sender, RoutedEventArgs e)
         {
             if (instructors_listView.SelectedIndex == -1 || instructors_listView.SelectedItems.Count > 1)
@@ -616,7 +615,7 @@ namespace DrNadaTreasureLand
                 return;
             }
 
-            var ins = (Instructor)instructors_listView.SelectedItem;
+            var ins = (Instructor)((ListViewItem)instructors_listView.SelectedItem).Content;
 
             if (Globals.InstructorSalaries[ins.Id].Count == 0)
             {
@@ -627,6 +626,11 @@ namespace DrNadaTreasureLand
             SalaryHistory win = new SalaryHistory();
             win.c = ins;
             win.ShowDialog();
+
+        }
+
+        private void instructors_listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

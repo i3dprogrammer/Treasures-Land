@@ -394,7 +394,7 @@ namespace TreasuresLand.SQL
             {
                 throw new Exception("The database Connection.connection is not established yet!");
             }
-
+            
             using (var command = new SQLiteCommand(q_PayInstructorSalary, Connection.conn))
             {
                 command.Parameters.AddWithValue("@InstructorId", InstructorId);

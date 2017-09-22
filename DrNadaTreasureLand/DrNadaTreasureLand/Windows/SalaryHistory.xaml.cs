@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TreasuresLand.Objects;
+using TreasuresLand.SQL;
 
 namespace DrNadaTreasureLand.Windows
 {
@@ -27,14 +28,14 @@ namespace DrNadaTreasureLand.Windows
             InitializeComponent();
         }
 
-        private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             if (c == null)
                 throw new ArgumentNullException("c", "Instructor cannot be null");
 
             if (Globals.InstructorSalaries.ContainsKey(c.Id))
             {
-                foreach(var item in Globals.InstructorSalaries[c.Id])
+                foreach (var item in Globals.InstructorSalaries[c.Id])
                 {
                     var lstItem = new Objects.InstructorSalaryListViewItem()
                     {
@@ -45,14 +46,31 @@ namespace DrNadaTreasureLand.Windows
                     if (Globals.Courses.ContainsKey(item.CourseId))
                         lstItem.Course = Globals.Courses[item.CourseId];
                     else
-                        lstItem.Course = new Course() { Name = "---" }; //HEHE XD
+                        lstItem.Course = new Course() { Name = "---", Id = item.CourseId }; //HEHE XD
 
                     lstView_main.Items.Add(lstItem);
                 }
-            } else
+            }
+            else
             {
                 throw new Exception("Instructor doesn't exist in salaries");
             }
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstView_main.SelectedIndex == -1)
+                return;
+
+            foreach (Objects.InstructorSalaryListViewItem item in lstView_main.SelectedItems)
+            {
+                if (await this.ShowMessageAsync("Payment", "You're going to pay " + item.Salary + " to " + Globals.Instructors[item.Instructor.Id].Name, MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
+                {
+                    Instructors.PayInstructorSalary(item.Instructor.Id, item.Course.Id);
+                }
+            }
+
+            Globals.RefreshReferenceInformation();
         }
     }
 }
