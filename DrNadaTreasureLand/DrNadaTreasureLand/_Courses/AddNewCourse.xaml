@@ -49,7 +49,7 @@
                 <Controls:NumericUpDown x:Name="num_level" HorizontalAlignment="Left" Height="6" Margin="278,31,0,0" VerticalAlignment="Top" Width="122"/>
                 <Label Content="Level" HorizontalAlignment="Left" Height="29" Margin="228,29,0,0" VerticalAlignment="Top" Width="43"/>
                 <Controls:NumericUpDown x:Name="num_pricePerChild" HorizontalAlignment="Left" Height="6" Margin="149,62,0,0" VerticalAlignment="Top" Width="251"/>
-                <Label Content="Instructor Percentage" HorizontalAlignment="Left" Height="29" Margin="0,62,0,0" VerticalAlignment="Top" Width="127"/>
+                <Label Content="Instructor Percentage" HorizontalAlignment="Left" Height="29" Margin="0,59,0,0" VerticalAlignment="Top" Width="127"/>
             </Grid>
         </GroupBox>
 

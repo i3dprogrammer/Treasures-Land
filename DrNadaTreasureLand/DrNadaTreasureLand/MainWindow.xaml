@@ -64,6 +64,11 @@
                         </ListView.ContextMenu>-->
                         <ListView.View>
                             <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=Address}"/>
+                                <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Path=Phone}"/>
+                                <GridViewColumn Header="Qualification" DisplayMemberBinding="{Binding Path=Qualifier}"/>
                                 <GridViewColumn Header="Paid">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -71,12 +76,6 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
-                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=Address}"/>
-                                <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Path=Phone}"/>
-                                <GridViewColumn Header="Qualification" DisplayMemberBinding="{Binding Path=Qualifier}"/>
                                 <!--<GridViewColumn Header="Courses" Width="300">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -167,8 +166,20 @@
                                 <GridViewColumn Header="Course" DisplayMemberBinding="{Binding Course.Name}"/>
                                 <GridViewColumn Header="Class" DisplayMemberBinding="{Binding Class.Number}"/>
                                 <GridViewColumn Header="Instructor Name" DisplayMemberBinding="{Binding Instructor.Name}"/>
-                                <GridViewColumn Header="Full" DisplayMemberBinding="{Binding Class.Full}"/>
-                                <GridViewColumn Header="Finished" DisplayMemberBinding="{Binding Class.Over}"/>
+                                <GridViewColumn Header="Full">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsEnabled="False" IsChecked="{Binding Class.Full}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Finished">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsEnabled="False" IsChecked="{Binding Class.Over}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                                 <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Class.StartDate, StringFormat=d}"/>
                                 <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Class.EndDate, StringFormat=d}"/>
                                 <GridViewColumn Header="Sessions Left" DisplayMemberBinding="{Binding Class.SessionsLeft}"/>
