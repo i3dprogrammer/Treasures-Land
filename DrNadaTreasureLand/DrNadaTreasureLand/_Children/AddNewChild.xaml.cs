@@ -148,7 +148,8 @@ namespace DrNadaTreasureLand._Children
                 //}
                 //await this.ShowMessageAsync("Courses Price", "Total price for chosen courses are: " + coursesCost + " EGP.");
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -160,13 +161,14 @@ namespace DrNadaTreasureLand._Children
         private string CalcBits(params CheckBox[] text)
         {
             string ret = "";
-            
-            foreach(var item in text)
+
+            foreach (var item in text)
             {
                 if (item.IsChecked == true)
                 {
                     ret = ret + "1";
-                } else
+                }
+                else
                 {
                     ret = ret + "0";
                 }
@@ -180,7 +182,7 @@ namespace DrNadaTreasureLand._Children
             if (text.Length != chks.Count())
                 throw new Exception("Cannot evaluate check boxes with bits of different length!");
 
-            for(int i = 0; i < text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (text[i] == '1')
                     chks[i].IsChecked = true;
@@ -246,8 +248,12 @@ namespace DrNadaTreasureLand._Children
                                     Checked = false,
                                     Class = item,
                                     Course = x.Value,
-                                    Instructor = Globals.Instructors.Single(z => z.Value.TeachingCourses.Contains(item)).Value,
                                 };
+
+                                if (Globals.Instructors.ToList().Exists(z => z.Value.TeachingCourses.Contains(item)))
+                                    newAvailableCourse.Instructor = Globals.Instructors.Single(z => z.Value.TeachingCourses.Contains(item)).Value;
+                                else
+                                    newAvailableCourse.Instructor = new Instructor() { Name = "---" }; //HEHE XD
 
                                 if (EditedChild != null && EditedChild.RegisteredCourses.Contains(item))
                                     newAvailableCourse.Checked = true;
@@ -257,7 +263,11 @@ namespace DrNadaTreasureLand._Children
                         }
                     }
                 });
-            } catch (Exception ex) { }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
         }
 
         private async void button_Copy2_Click(object sender, RoutedEventArgs e)
@@ -275,12 +285,7 @@ namespace DrNadaTreasureLand._Children
             Globals.ClearForm(this);
         }
 
-        private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void num_childAge_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        private void num_childAge_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
             UpdateCoursesListView();
         }
