@@ -23,8 +23,8 @@ namespace DrNadaTreasureLand.Windows
     /// </summary>
     public partial class Login
     {
-        private const float cp_height = 290;
-        private const float loginHeight = 240;
+        private const int cp_height = 410;
+        private const int loginHeight = cp_height-50;
         private const int cp_marginTop = 200;
         private const int loginMarginTop = 180;
         public Login()
@@ -62,8 +62,14 @@ namespace DrNadaTreasureLand.Windows
                 return;
             }
 
+            if (txt_oldPass.Text == txt_newPass.Text)
+            {
+                lbl_status.Text = "New password cannot match the current.";
+                return;
+            }
+
             RegistryManager.SaveEncryptedPass(Security.EncryptPass(txt_newPass.Text)); //Save the password in the registry.
-            await this.ShowMessageAsync("Success!", "Password Created/Changed.");
+            await this.ShowMessageAsync("Success!", "Password Created.");
             ChangeLayout(true);
         }
 
@@ -136,7 +142,7 @@ namespace DrNadaTreasureLand.Windows
                 mainWindow.StartConnection();
                 mainWindow.Show();
                 BlurWindow(false);
-                this.Visibility = Visibility.Hidden;
+                this.Close();
             }
         }
         private void SendDataToDeveloper()

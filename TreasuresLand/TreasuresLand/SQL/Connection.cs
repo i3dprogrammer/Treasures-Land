@@ -39,6 +39,12 @@ namespace TreasuresLand.SQL
                 await conn.OpenAsync();
         }
 
+        public static void Disconnect()
+        {
+            conn.Close();
+            conn.Dispose();
+        }
+
         //public static void Connect(string connString = "")
         //{
         //    conn = new SqlConnection();

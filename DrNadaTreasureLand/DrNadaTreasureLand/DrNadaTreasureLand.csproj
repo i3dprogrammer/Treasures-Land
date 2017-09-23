@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{ED071A4B-0C5F-4DC6-BC43-B939707BF599}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>DrNadaTreasureLand</RootNamespace>
     <AssemblyName>DrNadaTreasureLand</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>

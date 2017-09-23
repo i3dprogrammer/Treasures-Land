@@ -8,7 +8,7 @@
                       BorderThickness="2"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       Height="730.308"
-                      Width="1007.436" FontSize="15">
+                      Width="1007.436" FontSize="15" Closing="MetroWindow_Closing">
     <!--<Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             -->

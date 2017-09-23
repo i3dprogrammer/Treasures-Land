@@ -633,5 +633,11 @@ namespace DrNadaTreasureLand
         {
 
         }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Connection.Disconnect();
+            Application.Current.Shutdown();
+        }
     }
 }
